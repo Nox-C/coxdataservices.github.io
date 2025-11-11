@@ -60,10 +60,41 @@
         </div>
     </section>
 
+    <section class="hookie">
+        <div class="container">
+            <h2>Try the Hookie</h2>
+            <p>A combination of a horoscope and a fortune cookie. For just $1, we'll run a live data scrape and reveal a data-driven fortune just for you.</p>
+            <a href="hookie.html" class="btn">Reveal Your Fortune</a>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
             <p>&copy; 2024 Cox Data Services. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        const dataFacts = [
+            "The world produces 2.5 quintillion bytes of data every day.",
+            "More than 90% of the world's data has been created in the last two years.",
+            "By 2025, the total amount of digital data created worldwide is projected to reach 175 zettabytes.",
+            "Poor data quality costs the U.S. economy around $3.1 trillion annually.",
+            "The global data analytics market is expected to reach $132.9 billion by 2026.",
+            "Data scientists spend 80% of their time cleaning and organizing data.",
+            "The term 'big data' was first used in the 1990s.",
+            "Less than 0.5% of all data is ever analyzed and used.",
+            "The first 1-gigabyte hard drive was announced in 1980 and weighed 550 pounds.",
+            "Google processes over 3.5 billion searches per day."
+        ];
+
+        const factElement = document.getElementById('data-fact');
+        const newFactBtn = document.getElementById('new-fact-btn');
+
+        newFactBtn.addEventListener('click', () => {
+            const randomIndex = Math.floor(Math.random() * dataFacts.length);
+            factElement.textContent = dataFacts[randomIndex];
+        });
+    </script>
 </body>
 </html>

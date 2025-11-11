@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Hookie - Cox Data Services</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .console {
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+            border-radius: 5px;
+            max-width: 800px;
+            margin: auto;
+            height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .fortune {
+            background-color: #f4f4f4;
+            border-left: 5px solid #007bff;
+            padding: 20px;
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><img src="images/coxdataservices.png" alt="Cox Data Services Logo"></a>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="consciousness.html">Consciousness</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1>The Hookie</h1>
+            <p>Peer into the digital ether. For just $1, we'll run a live data scrape and reveal a data-driven fortune just for you.</p>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+                <img src="images/fortune.jpg" alt="Fortune" style="width: 150px; border-radius: 10px;">
+                <div id="paypal-button-container"></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hookie-simulation">
+        <div class="container">
+            <div id="console" class="console" style="display: none;"></div>
+            <div id="result" style="display: none;">
+                <h2>Scraped Data Sample</h2>
+                <pre>
+[
+    { "name": "John Doe", "email": "john.doe@example.com", "city": "New York" },
+    { "name": "Jane Smith", "email": "jane.smith@example.com", "city": "London" },
+    { "name": "Peter Jones", "email": "peter.jones@example.com", "city": "Sydney" }
+]
+                </pre>
+                <h2>Your Fortune</h2>
+                <p id="fortune" class="fortune"></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Cox Data Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAWOSw7zBqVhRIOMXk08-_oOgRATehGfGpl5X5tn1f7KZ_8xEB01hWf-pnOCOO9upCwd4q5phIpeuOBTU&currency=USD"></script>
+    <script>
+        const consoleElement = document.getElementById('console');
+        const resultElement = document.getElementById('result');
+        const fortuneElement = document.getElementById('fortune');
+
+        const fortunes = [
+            "A new opportunity will arise from an unexpected source.",
+            "Your data-driven decisions will lead to great success.",
+            "The information you seek is closer than you think.",
+            "Embrace change, for it will bring you new insights.",
+            "Your analytical skills will be your greatest asset.",
+            "A small detail will reveal a larger truth.",
+            "Trust your intuition, but verify with data.",
+            "The patterns of the past will illuminate the future.",
+            "A clean dataset is the foundation of a clear mind.",
+            "Your curiosity will be rewarded with knowledge."
+        ];
+
+        const consoleLines = [
+            "Initializing scraper...",
+            "Connecting to target website...",
+            "Bypassing security protocols...",
+            "Injecting scraping script...",
+            "Identifying data structures...",
+            "Extracting data blocks...",
+            "Parsing and cleaning data...",
+            "Filtering for relevant information...",
+            "Compiling data sample...",
+            "Analyzing data for hidden patterns...",
+            "Cross-referencing with astrological charts...",
+            "Generating your data-driven fortune...",
+            "Scrape complete."
+        ];
+
+        function startScraper() {
+            consoleElement.style.display = 'block';
+            consoleElement.innerHTML = '';
+            resultElement.style.display = 'none';
+            let lineIndex = 0;
+
+            const interval = setInterval(() => {
+                if (lineIndex < consoleLines.length) {
+                    consoleElement.innerHTML += `> ${consoleLines[lineIndex]}
+`;
+                    consoleElement.scrollTop = consoleElement.scrollHeight;
+                    lineIndex++;
+                } else {
+                    clearInterval(interval);
+                    const randomIndex = Math.floor(Math.random() * fortunes.length);
+                    fortuneElement.textContent = fortunes[randomIndex];
+                    resultElement.style.display = 'block';
+                }
+            }, 500);
+        }
+
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '1.00'
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Transaction completed by ' + details.payer.name.given_name);
+                    startScraper();
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
+</body>
+</html>
