@@ -9,8 +9,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Courier New', monospace; 
-            background: #000; 
-            color: #00ff00; 
+            background: linear-gradient(180deg, #1a1612 0%, #2d2416 50%, #1a1612 100%);
+            color: #d4af37; 
             overflow: hidden; 
             cursor: none;
         }
@@ -36,15 +36,21 @@
             left: 20px;
             font-size: 14px;
             z-index: 1000;
+            background: rgba(26, 22, 18, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: #d4af37;
         }
         
         .memory-fragment {
             position: absolute;
             width: 2px;
             height: 2px;
-            background: #ff00ff;
+            background: #d4af37;
             border-radius: 50%;
             animation: remember 12s linear infinite;
+            box-shadow: 0 0 10px #d4af37;
         }
         
         @keyframes remember {

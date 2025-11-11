@@ -6,9 +6,10 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     line-height: 1.6;
     color: #333;
+    background: linear-gradient(180deg, #1a1612 0%, #2d2416 50%, #1a1612 100%);
 }
 
 .container {
@@ -20,10 +21,15 @@ body {
 
 /* Navigation */
 nav {
-    background: #fff;
-    color: #333;
+    background: rgba(26, 22, 18, 0.95);
+    backdrop-filter: blur(20px);
+    color: #d4af37;
     padding: 1rem 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 nav .container {
@@ -46,56 +52,89 @@ nav ul li {
 }
 
 nav a {
-    color: #333;
+    color: rgba(212, 175, 55, 0.8);
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s;
+}
+nav a:hover {
+    color: #d4af37;
 }
 
 /* Header */
-header {
-    background: #0056b3;
-    color: #fff;
+header:not(.hero-section-image) {
+    background: rgba(26, 22, 18, 0.9);
+    color: #d4af37;
     padding: 80px 0;
     text-align: center;
 }
 
-header h1 {
+header:not(.hero-section-image) h1 {
     font-size: 3em;
     margin-bottom: 10px;
+    color: #d4af37;
 }
 
 .btn {
     display: inline-block;
-    background: #ffc107;
-    color: #333;
-    padding: 10px 20px;
+    background: #d4af37;
+    color: #1a1612;
+    padding: 12px 28px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 50px;
     margin-top: 20px;
     font-weight: bold;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+.btn:hover {
+    background: #f0c14b;
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
 }
 
 /* Services Section */
 .services {
-    padding: 60px 20px;
+    padding: 80px 20px;
     text-align: center;
+    background: rgba(26, 22, 18, 0.8);
 }
 
 .services h2 {
     margin-bottom: 40px;
-    font-size: 2em;
+    font-size: 2.5em;
+    color: #d4af37;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
 }
 
 .service {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    background: rgba(45, 36, 22, 0.6);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: all 0.3s;
+}
+.service:hover {
+    border-color: #d4af37;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+}
+.service h3 {
+    color: #d4af37;
+    margin-bottom: 1rem;
+}
+.service p {
+    color: rgba(255,255,255,0.8);
 }
 
 /* Footer */
 footer {
-    background: #333;
-    color: #fff;
+    background: rgba(26, 22, 18, 1);
+    color: rgba(255,255,255,0.8);
     text-align: center;
-    padding: 20px 0;
+    padding: 3rem 0;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 /* Contact Form */
@@ -124,15 +163,17 @@ footer {
 
 /* --- STYLES FOR TESTIMONIAL SECTION --- */
 .testimonials {
-    background-color: #f4f4f4;
-    color: #333;
-    padding: 60px 20px;
+    background: rgba(26, 22, 18, 0.9);
+    color: rgba(255,255,255,0.9);
+    padding: 80px 20px;
     text-align: center;
 }
 
 .testimonials h2 {
     margin-bottom: 40px;
-    font-size: 2em;
+    font-size: 2.5em;
+    color: #d4af37;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
 }
 
 .testimonial blockquote {
@@ -141,13 +182,17 @@ footer {
     line-height: 1.6;
     margin: 0 auto 20px auto;
     max-width: 800px;
-    color: #555;
+    color: rgba(255,255,255,0.8);
+    background: rgba(45, 36, 22, 0.6);
+    border-left: 4px solid #d4af37;
+    padding: 2rem;
+    border-radius: 8px;
 }
 
 .testimonial cite {
     font-weight: bold;
     font-style: normal;
-    color: #0056b3;
+    color: #d4af37;
 }
 
 /* --- STYLES FOR NEW PAGES --- */
@@ -237,14 +282,16 @@ footer {
 
 /* --- STYLES FOR TECH STACK SECTION --- */
 .tech-stack {
-    padding: 60px 20px;
+    padding: 80px 20px;
     text-align: center;
-    background-color: #fff;
+    background: rgba(45, 36, 22, 0.5);
 }
 
 .tech-stack h2 {
     margin-bottom: 40px;
-    font-size: 2em;
+    font-size: 2.5em;
+    color: #d4af37;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
 }
 
 .tech-logos {
@@ -267,12 +314,14 @@ footer {
 
 /* --- STYLES FOR HOOKIE PROMO SECTION (STATIC VERSION) --- */
 .hookie-promo {
-    position: relative; /* Crucial for layering */
-    background-color: #0d1a2e;
+    position: relative;
+    background: linear-gradient(135deg, #1a1612 0%, #2d2416 50%, #1a1612 100%);
     color: #fff;
-    padding: 60px 20px;
+    padding: 80px 20px;
     text-align: center;
-    overflow: hidden; /* Keeps particles contained */
+    overflow: hidden;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
 }
 
 #hookie-promo-particles {
@@ -291,8 +340,8 @@ footer {
 
 .hookie-promo h2 {
     font-size: 2.5em;
-    color: #ffc107;
-    text-shadow: 0 0 5px #ffc107;
+    color: #d4af37;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
     margin-bottom: 20px;
 }
 

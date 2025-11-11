@@ -11,15 +11,17 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Inter', sans-serif; 
-            background: #0a0a0a; 
+            background: linear-gradient(180deg, #1a1612 0%, #2d2416 50%, #1a1612 100%);
             color: #e0e0e0; 
             overflow-x: hidden; 
         }
         
         nav {
             position: fixed; top: 0; width: 100%; 
-            background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0,255,255,0.2); z-index: 1000; padding: 0 2rem;
+            background: rgba(26, 22, 18, 0.95); 
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2); z-index: 1000; padding: 0 2rem;
         }
         
         .nav-container {
@@ -28,19 +30,20 @@
         }
         
         .logo {
-            font-size: 1.8rem; font-weight: 700; color: #ffffff;
+            font-size: 1.8rem; font-weight: 700; color: #d4af37;
             text-decoration: none;
         }
         
         .nav-links { display: flex; list-style: none; gap: 2rem; }
         .nav-links a { 
-            text-decoration: none; color: rgba(255,255,255,0.8); 
+            text-decoration: none; color: rgba(212, 175, 55, 0.8); 
             font-weight: 500; transition: color 0.3s; 
         }
-        .nav-links a:hover { color: #ffffff; }
+        .nav-links a:hover { color: #d4af37; }
         
         .hero {
-            padding: 160px 2rem 80px; text-align: center; background: #000;
+            padding: 160px 2rem 80px; text-align: center; 
+            background: linear-gradient(135deg, #1a1612 0%, #2d2416 100%);
             position: relative; overflow: hidden; height: 60vh;
         }
         
@@ -48,7 +51,8 @@
         .hero-content { position: relative; z-index: 2; }
         
         .hero h1 {
-            font-size: 3rem; font-weight: 700; margin-bottom: 2rem; color: #ffffff;
+            font-size: 3rem; font-weight: 700; margin-bottom: 2rem; color: #d4af37;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
         }
         
 
@@ -58,13 +62,14 @@
         }
         
         .tagline {
-            font-size: 1.1rem; color: #ffffff; margin-top: 2rem;
+            font-size: 1.1rem; color: #d4af37; margin-top: 2rem;
             font-weight: 600; letter-spacing: 1px;
             text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
         
         .pricing {
-            padding: 80px 2rem; background: #0a0a0a;
+            padding: 80px 2rem; background: rgba(26, 22, 18, 0.8);
         }
         
         .pricing-container { max-width: 1400px; margin: 0 auto; }
@@ -74,40 +79,40 @@
         }
         
         .pricing-card {
-            background: #1a1a1a;
-            border: 1px solid #333; border-radius: 8px; padding: 0;
+            background: rgba(45, 36, 22, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px; padding: 0;
             overflow: hidden; transition: all 0.2s; position: relative;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
         
         .pricing-card:hover {
-            border-color: #555; transform: translateY(-4px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            border-color: #d4af37; transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
         }
         
         .pricing-card.featured {
-            border-color: #666;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+            border-color: #d4af37;
+            box-shadow: 0 6px 24px rgba(212, 175, 55, 0.3);
         }
         
         .pricing-card.featured::before {
             content: "Most Popular"; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            background: #333; color: #fff;
+            background: #d4af37; color: #1a1612;
             padding: 8px 24px; font-size: 0.9rem; font-weight: 600; border-radius: 0 0 8px 8px;
         }
         
         .pricing-header {
             padding: 2.5rem 2rem 2rem; text-align: center;
-            background: #222;
-            border-bottom: 1px solid #333;
+            background: rgba(26, 22, 18, 0.8);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
         }
         
         .pricing-card.featured .pricing-header {
-            background: #2a2a2a;
+            background: rgba(45, 36, 22, 0.9);
         }
         
         .pricing-title {
-            font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; color: #ffffff;
+            font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; color: #d4af37;
             letter-spacing: 0.5px;
         }
         
@@ -126,7 +131,7 @@
         }
         
         .pricing-features { 
-            padding: 2rem; list-style: none; background: #111; 
+            padding: 2rem; list-style: none; background: rgba(26, 22, 18, 0.6); 
         }
         .pricing-features li {
             padding: 0.75rem 0; border-bottom: 1px solid #2a2a2a;
@@ -135,43 +140,45 @@
         }
         
         .pricing-features li:before {
-            content: "✓"; color: #999; font-weight: 600; margin-right: 0.75rem;
+            content: "✓"; color: #d4af37; font-weight: 600; margin-right: 0.75rem;
             font-size: 1rem;
         }
         
         .pricing-footer { 
-            padding: 2rem; background: #0f0f0f; 
-            border-top: 1px solid #2a2a2a; 
+            padding: 2rem; background: rgba(26, 22, 18, 0.9); 
+            border-top: 1px solid rgba(212, 175, 55, 0.3); 
         }
         
         .paypal-button {
-            width: 100%; background: #0070ba;
-            color: #fff; border: none; padding: 16px 24px; border-radius: 6px;
+            width: 100%; background: #d4af37;
+            color: #1a1612; border: none; padding: 16px 24px; border-radius: 50px;
             font-size: 1rem; font-weight: 600; cursor: pointer;
             transition: all 0.2s; letter-spacing: 0.5px;
-            box-shadow: 0 2px 8px rgba(0,112,186,0.2);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
         }
         
         .paypal-button:hover {
-            background: #005ea6;
+            background: #f0c14b;
             transform: translateY(-2px); 
-            box-shadow: 0 4px 12px rgba(0,112,186,0.3);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
         }
         
         .enterprise {
-            padding: 80px 2rem; background: linear-gradient(45deg, #000, #0a0a0a);
+            padding: 80px 2rem; background: linear-gradient(135deg, #1a1612 0%, #2d2416 50%, #1a1612 100%);
             color: white; text-align: center; position: relative;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
         }
         
         .enterprise::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
         }
         
         .enterprise-container { max-width: 1000px; margin: 0 auto; }
         
         .enterprise h2 {
-            font-size: 3rem; font-weight: 700; margin-bottom: 1.5rem; color: #ffffff;
+            font-size: 3rem; font-weight: 700; margin-bottom: 1.5rem; color: #d4af37;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
         }
         
         .enterprise p { font-size: 1.1rem; margin-bottom: 3rem; opacity: 0.8; }
@@ -182,35 +189,35 @@
         }
         
         .enterprise-feature {
-            padding: 1.5rem; background: #1a1a1a;
-            border-radius: 8px; border: 1px solid #333; transition: all 0.2s;
+            padding: 1.5rem; background: rgba(45, 36, 22, 0.6);
+            border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3); transition: all 0.2s;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         
         .enterprise-feature:hover {
-            border-color: #444; box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            border-color: #d4af37; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
             transform: translateY(-2px);
         }
         
-        .enterprise-feature h4 { font-weight: 700; margin-bottom: 1rem; color: #ffffff; }
+        .enterprise-feature h4 { font-weight: 700; margin-bottom: 1rem; color: #d4af37; }
         
         .enterprise-cta {
-            background: #333; color: #fff;
-            padding: 16px 32px; border-radius: 6px; text-decoration: none;
+            background: #d4af37; color: #1a1612;
+            padding: 16px 32px; border-radius: 50px; text-decoration: none;
             font-weight: 600; transition: all 0.2s; display: inline-block;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3); 
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); 
             letter-spacing: 0.5px;
         }
         
         .enterprise-cta:hover {
-            background: #444;
+            background: #f0c14b;
             transform: translateY(-2px); 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
         }
         
         footer {
-            background: #000; color: white; padding: 3rem 2rem 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            background: rgba(26, 22, 18, 1); color: rgba(255,255,255,0.8); padding: 3rem 2rem 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
         }
         
         .footer-container { max-width: 1400px; margin: 0 auto; text-align: center; }
@@ -219,10 +226,10 @@
         }
         
         .footer-links a {
-            color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s;
+            color: rgba(212, 175, 55, 0.7); text-decoration: none; transition: color 0.3s;
         }
         
-        .footer-links a:hover { color: white; }
+        .footer-links a:hover { color: #d4af37; }
         .copyright { color: rgba(255,255,255,0.5); font-size: 0.9rem; }
         
         @media (max-width: 768px) {
@@ -401,7 +408,7 @@
             </div>
             <div class="copyright">
                 © 2024 Cox Data Services. All rights reserved.<br>
-                <span style="font-style: italic; color: #666; margin-top: 0.5rem; display: block;">"Everything else is just a rumor"</span>
+                <span style="font-style: italic; color: #d4af37; margin-top: 0.5rem; display: block;">"Everything else is just a rumor"</span>
             </div>
         </div>
     </footer>

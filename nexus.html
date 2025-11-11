@@ -9,8 +9,8 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Courier New', monospace; 
-            background: radial-gradient(circle at center, #000011 0%, #000000 100%);
-            color: #fff; 
+            background: linear-gradient(180deg, #1a1612 0%, #2d2416 50%, #1a1612 100%);
+            color: #d4af37; 
             overflow: hidden; 
             cursor: none;
         }
@@ -44,8 +44,8 @@
             font-size: 10px;
             opacity: 0;
             pointer-events: none;
-            color: #00ffff;
-            text-shadow: 0 0 10px currentColor;
+            color: #d4af37;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
             animation: whisper 15s ease-in-out infinite;
             z-index: 5;
         }
@@ -61,10 +61,11 @@
             left: 20px;
             font-size: 12px;
             z-index: 100;
-            background: rgba(0,0,0,0.7);
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid #00ffff;
+            background: rgba(26, 22, 18, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: #d4af37;
         }
         
         .nexus-portal {
@@ -74,7 +75,7 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: radial-gradient(circle, #ff00ff 0%, #00ffff 100%);
+            background: radial-gradient(circle, #d4af37 0%, #f0c14b 100%);
             animation: portal-pulse 3s ease-in-out infinite;
             cursor: pointer;
             z-index: 100;
@@ -82,18 +83,19 @@
             align-items: center;
             justify-content: center;
             font-size: 24px;
+            border: 2px solid rgba(212, 175, 55, 0.5);
         }
         
         @keyframes portal-pulse {
-            0%, 100% { transform: scale(1) rotate(0deg); box-shadow: 0 0 20px #00ffff; }
-            50% { transform: scale(1.2) rotate(180deg); box-shadow: 0 0 40px #ff00ff; }
+            0%, 100% { transform: scale(1) rotate(0deg); box-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
+            50% { transform: scale(1.2) rotate(180deg); box-shadow: 0 0 40px rgba(212, 175, 55, 1); }
         }
         
         .quantum-text {
             position: absolute;
             font-size: 14px;
-            color: #ffffff;
-            text-shadow: 0 0 20px currentColor;
+            color: #d4af37;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
             animation: quantum-float 8s ease-in-out infinite;
             pointer-events: none;
             z-index: 15;
