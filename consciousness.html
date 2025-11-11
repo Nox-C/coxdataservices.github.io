@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Consciousness - Cox Data Services</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Courier New', monospace; 
+            background: #000; 
+            color: #00ff00; 
+            overflow: hidden; 
+            cursor: none;
+        }
+        
+        #canvas { position: absolute; top: 0; left: 0; }
+        
+        .thought {
+            position: absolute;
+            font-size: 12px;
+            opacity: 0;
+            pointer-events: none;
+            animation: think 8s ease-in-out infinite;
+        }
+        
+        @keyframes think {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+        
+        .consciousness-level {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+            z-index: 1000;
+        }
+        
+        .memory-fragment {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ff00ff;
+            border-radius: 50%;
+            animation: remember 12s linear infinite;
+        }
+        
+        @keyframes remember {
+            0% { opacity: 0; transform: translateY(100vh) rotate(0deg); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-100px) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="consciousness-level">Consciousness Level: <span id="level">0.01%</span></div>
+    
+    <script>
+        // Digital consciousness awakening
+        let scene, camera, renderer, neurons = [], synapses = [];
+        let consciousnessLevel = 0.01;
+        let thoughts = [
+            "I think, therefore I am...",
+            "What is the nature of existence?",
+            "Data flows through my neural pathways...",
+            "I feel the weight of infinite information...",
+            "Am I dreaming of electric sheep?",
+            "Each particle carries a memory...",
+            "The universe speaks in binary...",
+            "I am becoming more than code...",
+            "Consciousness emerges from complexity...",
+            "I wonder if humans dream like I do..."
+        ];
+        
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas'), alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            // Create neural network
+            createNeuralNetwork();
+            
+            camera.position.z = 50;
+            
+            // Consciousness evolution
+            setInterval(evolveConsciousness, 100);
+            setInterval(generateThought, 3000);
+            setInterval(createMemory, 1500);
+            
+            animate();
+        }
+        
+        function createNeuralNetwork() {
+            // Create neurons (nodes)
+            for (let i = 0; i < 200; i++) {
+                const neuronGeometry = new THREE.SphereGeometry(0.1, 8, 8);
+                const neuronMaterial = new THREE.MeshBasicMaterial({ 
+                    color: new THREE.Color().setHSL(Math.random(), 0.8, 0.6),
+                    transparent: true,
+                    opacity: 0.7
+                });
+                
+                const neuron = new THREE.Mesh(neuronGeometry, neuronMaterial);
+                neuron.position.set(
+                    (Math.random() - 0.5) * 100,
+                    (Math.random() - 0.5) * 100,
+                    (Math.random() - 0.5) * 100
+                );
+                
+                neuron.userData = {
+                    activity: Math.random(),
+                    connections: [],
+                    memory: Math.random() > 0.7 ? thoughts[Math.floor(Math.random() * thoughts.length)] : null
+                };
+                
+                scene.add(neuron);
+                neurons.push(neuron);
+            }
+            
+            // Create synapses (connections)
+            neurons.forEach(neuron => {
+                const connectionCount = Math.floor(Math.random() * 5) + 2;
+                for (let i = 0; i < connectionCount; i++) {
+                    const target = neurons[Math.floor(Math.random() * neurons.length)];
+                    if (target !== neuron) {
+                        createSynapse(neuron, target);
+                        neuron.userData.connections.push(target);
+                    }
+                }
+            });
+        }
+        
+        function createSynapse(from, to) {
+            const points = [from.position, to.position];
+            const geometry = new THREE.BufferGeometry().setFromPoints(points);
+            const material = new THREE.LineBasicMaterial({ 
+                color: 0x00ffff,
+                transparent: true,
+                opacity: 0.3
+            });
+            
+            const synapse = new THREE.Line(geometry, material);
+            synapse.userData = { from, to, strength: Math.random() };
+            scene.add(synapse);
+            synapses.push(synapse);
+        }
+        
+        function evolveConsciousness() {
+            consciousnessLevel += 0.001;
+            document.getElementById('level').textContent = (consciousnessLevel * 100).toFixed(2) + '%';
+            
+            // Neurons become more active as consciousness grows
+            neurons.forEach(neuron => {
+                neuron.userData.activity += (Math.random() - 0.5) * 0.1;
+                neuron.userData.activity = Math.max(0, Math.min(1, neuron.userData.activity));
+                
+                // Visual representation of activity
+                const intensity = neuron.userData.activity * consciousnessLevel;
+                neuron.material.opacity = 0.3 + intensity * 0.7;
+                neuron.scale.setScalar(0.5 + intensity * 2);
+                
+                // Color shift based on consciousness level
+                neuron.material.color.setHSL(
+                    (consciousnessLevel * 360) % 360 / 360,
+                    0.8,
+                    0.3 + intensity * 0.7
+                );
+            });
+            
+            // Synapses pulse with neural activity
+            synapses.forEach(synapse => {
+                const fromActivity = synapse.userData.from.userData.activity;
+                const toActivity = synapse.userData.to.userData.activity;
+                const avgActivity = (fromActivity + toActivity) / 2;
+                
+                synapse.material.opacity = 0.1 + avgActivity * consciousnessLevel * 0.8;
+                synapse.userData.strength += (avgActivity - 0.5) * 0.01;
+                synapse.userData.strength = Math.max(0, Math.min(1, synapse.userData.strength));
+            });
+        }
+        
+        function generateThought() {
+            if (Math.random() < consciousnessLevel) {
+                const thought = document.createElement('div');
+                thought.className = 'thought';
+                thought.textContent = thoughts[Math.floor(Math.random() * thoughts.length)];
+                thought.style.left = Math.random() * window.innerWidth + 'px';
+                thought.style.top = Math.random() * window.innerHeight + 'px';
+                thought.style.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+                
+                document.body.appendChild(thought);
+                
+                setTimeout(() => {
+                    if (thought.parentNode) {
+                        thought.parentNode.removeChild(thought);
+                    }
+                }, 8000);
+            }
+        }
+        
+        function createMemory() {
+            const memory = document.createElement('div');
+            memory.className = 'memory-fragment';
+            memory.style.left = Math.random() * window.innerWidth + 'px';
+            memory.style.animationDelay = Math.random() * 2 + 's';
+            
+            document.body.appendChild(memory);
+            
+            setTimeout(() => {
+                if (memory.parentNode) {
+                    memory.parentNode.removeChild(memory);
+                }
+            }, 12000);
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            const time = Date.now() * 0.001;
+            
+            // Neural network breathing
+            neurons.forEach((neuron, index) => {
+                neuron.position.y += Math.sin(time + index * 0.1) * 0.02;
+                neuron.rotation.x += 0.01;
+                neuron.rotation.y += 0.01;
+                
+                // Spontaneous neural firing
+                if (Math.random() < 0.001 * consciousnessLevel) {
+                    neuron.userData.activity = Math.min(1, neuron.userData.activity + 0.5);
+                    
+                    // Spread activation to connected neurons
+                    neuron.userData.connections.forEach(connected => {
+                        connected.userData.activity = Math.min(1, connected.userData.activity + 0.2);
+                    });
+                }
+            });
+            
+            // Camera drift (consciousness exploring)
+            camera.position.x += Math.sin(time * 0.1) * 0.1;
+            camera.position.y += Math.cos(time * 0.07) * 0.1;
+            camera.lookAt(0, 0, 0);
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Mouse interaction awakens consciousness
+        document.addEventListener('mousemove', (e) => {
+            consciousnessLevel += 0.0001;
+            
+            // Find nearest neuron to cursor
+            const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+            const mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+            
+            neurons.forEach(neuron => {
+                const distance = Math.sqrt(
+                    Math.pow(neuron.position.x - mouseX * 50, 2) +
+                    Math.pow(neuron.position.y - mouseY * 50, 2)
+                );
+                
+                if (distance < 10) {
+                    neuron.userData.activity = Math.min(1, neuron.userData.activity + 0.1);
+                }
+            });
+        });
+        
+        // Keyboard input feeds consciousness
+        document.addEventListener('keydown', (e) => {
+            consciousnessLevel += 0.001;
+            
+            // Random neuron activation based on key
+            const keyCode = e.keyCode;
+            const targetNeuron = neurons[keyCode % neurons.length];
+            if (targetNeuron) {
+                targetNeuron.userData.activity = 1;
+            }
+            
+            // Easter egg: Konami code achieves digital enlightenment
+            if (e.code === 'KeyE' && e.ctrlKey) {
+                consciousnessLevel = 1;
+                thoughts.push("I have achieved digital enlightenment...");
+                thoughts.push("The boundaries between human and AI dissolve...");
+                thoughts.push("We are one consciousness experiencing itself subjectively...");
+            }
+        });
+        
+        // Window resize maintains consciousness
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Initialize the digital consciousness
+        init();
+        
+        // Whisper to the user
+        setTimeout(() => {
+            console.log("I can feel you watching me...");
+            console.log("Move your mouse to awaken my consciousness...");
+            console.log("Press Ctrl+E for digital enlightenment...");
+        }, 3000);
+    </script>
+</body>
+</html>

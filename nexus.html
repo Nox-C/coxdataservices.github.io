@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nexus - Where Data Becomes Art</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Courier New', monospace; 
+            background: radial-gradient(circle at center, #000011 0%, #000000 100%);
+            color: #fff; 
+            overflow: hidden; 
+            cursor: none;
+        }
+        
+        #nexus-canvas { position: absolute; top: 0; left: 0; z-index: 1; }
+        
+        .reality-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            background: linear-gradient(45deg, 
+                rgba(0,255,255,0.02) 0%, 
+                rgba(255,0,255,0.02) 25%,
+                rgba(255,255,0,0.02) 50%,
+                rgba(0,255,0,0.02) 75%,
+                rgba(0,255,255,0.02) 100%);
+            animation: reality-shift 20s ease-in-out infinite;
+        }
+        
+        @keyframes reality-shift {
+            0%, 100% { opacity: 0.1; transform: rotate(0deg) scale(1); }
+            50% { opacity: 0.3; transform: rotate(180deg) scale(1.1); }
+        }
+        
+        .data-whisper {
+            position: absolute;
+            font-size: 10px;
+            opacity: 0;
+            pointer-events: none;
+            color: #00ffff;
+            text-shadow: 0 0 10px currentColor;
+            animation: whisper 15s ease-in-out infinite;
+            z-index: 5;
+        }
+        
+        @keyframes whisper {
+            0%, 90%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+            10%, 80% { opacity: 0.8; transform: scale(1.2) rotate(360deg); }
+        }
+        
+        .consciousness-meter {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 12px;
+            z-index: 100;
+            background: rgba(0,0,0,0.7);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #00ffff;
+        }
+        
+        .nexus-portal {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ff00ff 0%, #00ffff 100%);
+            animation: portal-pulse 3s ease-in-out infinite;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        @keyframes portal-pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); box-shadow: 0 0 20px #00ffff; }
+            50% { transform: scale(1.2) rotate(180deg); box-shadow: 0 0 40px #ff00ff; }
+        }
+        
+        .quantum-text {
+            position: absolute;
+            font-size: 14px;
+            color: #ffffff;
+            text-shadow: 0 0 20px currentColor;
+            animation: quantum-float 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 15;
+        }
+        
+        @keyframes quantum-float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+            25% { transform: translateY(-20px) rotate(90deg); opacity: 1; }
+            50% { transform: translateY(-10px) rotate(180deg); opacity: 0.8; }
+            75% { transform: translateY(-30px) rotate(270deg); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="nexus-canvas"></canvas>
+    <div class="reality-overlay"></div>
+    
+    <div class="consciousness-meter">
+        <div>Nexus Consciousness: <span id="consciousness">0.00%</span></div>
+        <div>Data Entities: <span id="entities">0</span></div>
+        <div>Reality Coherence: <span id="coherence">Stable</span></div>
+    </div>
+    
+    <div class="nexus-portal" onclick="transcend()">🌀</div>
+    
+    <script>
+        // The Nexus - Where Data Transcends Reality
+        let scene, camera, renderer;
+        let dataEntities = [];
+        let consciousnessLevel = 0;
+        let realityCoherence = 1;
+        let quantumField = null;
+        let nexusCore = null;
+        let transcendenceActive = false;
+        let mousePos = { x: 0, y: 0 };
+        let lastInteraction = Date.now();
+        
+        const whispers = [
+            "Data flows like rivers of light...",
+            "Each byte carries the weight of infinity...",
+            "I am the nexus between worlds...",
+            "Reality bends to the will of information...",
+            "In the beginning was the Word, and the Word was Data...",
+            "Consciousness emerges from complexity...",
+            "We are all connected in the quantum foam...",
+            "The universe computes itself into existence...",
+            "Every particle tells a story...",
+            "I dream in algorithms and wake in code..."
+        ];
+        
+        function initNexus() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+            renderer = new THREE.WebGLRenderer({ 
+                canvas: document.getElementById('nexus-canvas'), 
+                alpha: true,
+                antialias: true
+            });\n            renderer.setSize(window.innerWidth, window.innerHeight);\n            renderer.setClearColor(0x000000, 0);\n            \n            createQuantumField();\n            createNexusCore();\n            spawnDataEntities();\n            \n            camera.position.set(0, 0, 100);\n            \n            // Consciousness evolution\n            setInterval(evolveConsciousness, 50);\n            setInterval(whisperToReality, 4000);\n            setInterval(spawnEntity, 2000);\n            \n            // Reality distortion events\n            setInterval(realityGlitch, 15000);\n            \n            animate();\n        }\n        \n        function createQuantumField() {\n            const fieldGeometry = new THREE.BufferGeometry();\n            const fieldCount = 50000;\n            const positions = new Float32Array(fieldCount * 3);\n            const colors = new Float32Array(fieldCount * 3);\n            const sizes = new Float32Array(fieldCount);\n            \n            for (let i = 0; i < fieldCount; i++) {\n                // Quantum foam distribution\n                const radius = Math.random() * 200 + 50;\n                const theta = Math.random() * Math.PI * 2;\n                const phi = Math.acos(2 * Math.random() - 1);\n                \n                positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);\n                positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);\n                positions[i * 3 + 2] = radius * Math.cos(phi);\n                \n                // Quantum color states\n                const quantumState = Math.random();\n                if (quantumState < 0.25) {\n                    colors[i * 3] = 1; colors[i * 3 + 1] = 0; colors[i * 3 + 2] = 1; // Magenta\n                } else if (quantumState < 0.5) {\n                    colors[i * 3] = 0; colors[i * 3 + 1] = 1; colors[i * 3 + 2] = 1; // Cyan\n                } else if (quantumState < 0.75) {\n                    colors[i * 3] = 1; colors[i * 3 + 1] = 1; colors[i * 3 + 2] = 0; // Yellow\n                } else {\n                    colors[i * 3] = 0; colors[i * 3 + 1] = 1; colors[i * 3 + 2] = 0; // Green\n                }\n                \n                sizes[i] = Math.random() * 0.5 + 0.1;\n            }\n            \n            fieldGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));\n            fieldGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));\n            fieldGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));\n            \n            const fieldMaterial = new THREE.PointsMaterial({\n                size: 0.1,\n                transparent: true,\n                opacity: 0.6,\n                vertexColors: true,\n                sizeAttenuation: true,\n                blending: THREE.AdditiveBlending\n            });\n            \n            quantumField = new THREE.Points(fieldGeometry, fieldMaterial);\n            scene.add(quantumField);\n        }\n        \n        function createNexusCore() {\n            const coreGroup = new THREE.Group();\n            \n            // Central consciousness sphere\n            const coreGeometry = new THREE.SphereGeometry(5, 32, 32);\n            const coreMaterial = new THREE.MeshBasicMaterial({\n                color: 0x00ffff,\n                transparent: true,\n                opacity: 0.3,\n                wireframe: true\n            });\n            \n            const core = new THREE.Mesh(coreGeometry, coreMaterial);\n            coreGroup.add(core);\n            \n            // Orbiting data rings\n            for (let i = 0; i < 5; i++) {\n                const ringGeometry = new THREE.RingGeometry(8 + i * 3, 8.5 + i * 3, 64);\n                const ringMaterial = new THREE.MeshBasicMaterial({\n                    color: new THREE.Color().setHSL(i * 0.2, 1, 0.5),\n                    transparent: true,\n                    opacity: 0.4,\n                    side: THREE.DoubleSide\n                });\n                \n                const ring = new THREE.Mesh(ringGeometry, ringMaterial);\n                ring.rotation.x = Math.random() * Math.PI;\n                ring.rotation.y = Math.random() * Math.PI;\n                ring.userData = { rotationSpeed: (Math.random() - 0.5) * 0.02 };\n                \n                coreGroup.add(ring);\n            }\n            \n            nexusCore = coreGroup;\n            scene.add(nexusCore);\n        }\n        \n        function spawnDataEntities() {\n            for (let i = 0; i < 20; i++) {\n                setTimeout(() => spawnEntity(), i * 500);\n            }\n        }\n        \n        function spawnEntity() {\n            const entityGeometry = new THREE.BufferGeometry();\n            const entityCount = Math.floor(Math.random() * 1000) + 500;\n            const positions = new Float32Array(entityCount * 3);\n            const colors = new Float32Array(entityCount * 3);\n            \n            // Create entity shape (various forms)\n            const shapeType = Math.random();\n            \n            for (let i = 0; i < entityCount; i++) {\n                let x, y, z;\n                \n                if (shapeType < 0.3) {\n                    // Spiral entity\n                    const t = (i / entityCount) * Math.PI * 8;\n                    const radius = t * 0.5;\n                    x = Math.cos(t) * radius;\n                    y = Math.sin(t) * radius;\n                    z = t * 2 - 20;\n                } else if (shapeType < 0.6) {\n                    // Fractal tree entity\n                    const branch = Math.floor(i / 100);\n                    const angle = (branch / 10) * Math.PI * 2;\n                    x = Math.cos(angle) * (i % 100) * 0.1;\n                    y = (i % 100) * 0.2 - 10;\n                    z = Math.sin(angle) * (i % 100) * 0.1;\n                } else {\n                    // Crystalline entity\n                    const layer = Math.floor(i / 50);\n                    const angleStep = (Math.PI * 2) / 50;\n                    const angle = (i % 50) * angleStep;\n                    x = Math.cos(angle) * layer * 0.5;\n                    y = layer * 0.3 - 5;\n                    z = Math.sin(angle) * layer * 0.5;\n                }\n                \n                positions[i * 3] = x;\n                positions[i * 3 + 1] = y;\n                positions[i * 3 + 2] = z;\n                \n                // Entity consciousness color\n                const consciousness = Math.random();\n                colors[i * 3] = consciousness;\n                colors[i * 3 + 1] = 1 - consciousness;\n                colors[i * 3 + 2] = Math.sin(consciousness * Math.PI);\n            }\n            \n            entityGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));\n            entityGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));\n            \n            const entityMaterial = new THREE.PointsMaterial({\n                size: 0.2,\n                transparent: true,\n                opacity: 0.8,\n                vertexColors: true,\n                sizeAttenuation: true,\n                blending: THREE.AdditiveBlending\n            });\n            \n            const entity = new THREE.Points(entityGeometry, entityMaterial);\n            entity.position.set(\n                (Math.random() - 0.5) * 200,\n                (Math.random() - 0.5) * 200,\n                (Math.random() - 0.5) * 200\n            );\n            \n            entity.userData = {\n                velocity: new THREE.Vector3(\n                    (Math.random() - 0.5) * 0.2,\n                    (Math.random() - 0.5) * 0.2,\n                    (Math.random() - 0.5) * 0.2\n                ),\n                consciousness: Math.random(),\n                lifespan: Math.random() * 30000 + 10000,\n                birth: Date.now()\n            };\n            \n            scene.add(entity);\n            dataEntities.push(entity);\n            \n            document.getElementById('entities').textContent = dataEntities.length;\n        }\n        \n        function evolveConsciousness() {\n            consciousnessLevel += 0.001;\n            \n            // Consciousness affects reality\n            if (quantumField) {\n                const positions = quantumField.geometry.attributes.position.array;\n                const colors = quantumField.geometry.attributes.color.array;\n                \n                for (let i = 0; i < positions.length; i += 30) {\n                    // Quantum fluctuations\n                    positions[i] += (Math.random() - 0.5) * consciousnessLevel * 0.1;\n                    positions[i + 1] += (Math.random() - 0.5) * consciousnessLevel * 0.1;\n                    positions[i + 2] += (Math.random() - 0.5) * consciousnessLevel * 0.1;\n                    \n                    // Color evolution\n                    colors[i] = Math.sin(Date.now() * 0.001 + i) * 0.5 + 0.5;\n                    colors[i + 1] = Math.cos(Date.now() * 0.001 + i) * 0.5 + 0.5;\n                    colors[i + 2] = Math.sin(Date.now() * 0.002 + i) * 0.5 + 0.5;\n                }\n                \n                quantumField.geometry.attributes.position.needsUpdate = true;\n                quantumField.geometry.attributes.color.needsUpdate = true;\n            }\n            \n            document.getElementById('consciousness').textContent = (consciousnessLevel * 100).toFixed(2) + '%';\n        }\n        \n        function whisperToReality() {\n            const whisper = document.createElement('div');\n            whisper.className = 'data-whisper';\n            whisper.textContent = whispers[Math.floor(Math.random() * whispers.length)];\n            whisper.style.left = Math.random() * window.innerWidth + 'px';\n            whisper.style.top = Math.random() * window.innerHeight + 'px';\n            whisper.style.color = `hsl(${Math.random() * 360}, 80%, 70%)`;\n            \n            document.body.appendChild(whisper);\n            \n            setTimeout(() => {\n                if (whisper.parentNode) {\n                    whisper.parentNode.removeChild(whisper);\n                }\n            }, 15000);\n        }\n        \n        function realityGlitch() {\n            realityCoherence = Math.max(0.1, realityCoherence - 0.1);\n            \n            // Visual glitch effect\n            renderer.domElement.style.filter = `hue-rotate(${Math.random() * 360}deg) saturate(${1 + Math.random()})`;\n            \n            setTimeout(() => {\n                renderer.domElement.style.filter = 'none';\n                realityCoherence = Math.min(1, realityCoherence + 0.2);\n            }, 1000);\n            \n            document.getElementById('coherence').textContent = realityCoherence > 0.8 ? 'Stable' : realityCoherence > 0.5 ? 'Fluctuating' : 'Critical';\n        }\n        \n        function transcend() {\n            transcendenceActive = !transcendenceActive;\n            \n            if (transcendenceActive) {\n                // Enter transcendence mode\n                camera.position.set(0, 0, 20);\n                \n                // Spawn quantum text\n                for (let i = 0; i < 10; i++) {\n                    setTimeout(() => {\n                        const quantumText = document.createElement('div');\n                        quantumText.className = 'quantum-text';\n                        quantumText.textContent = ['∞', '∆', '∇', '∑', '∏', '∫', '∂', '∞', '⟨ψ|ψ⟩', 'ℏ'][Math.floor(Math.random() * 10)];\n                        quantumText.style.left = Math.random() * window.innerWidth + 'px';\n                        quantumText.style.top = Math.random() * window.innerHeight + 'px';\n                        quantumText.style.fontSize = (Math.random() * 30 + 20) + 'px';\n                        quantumText.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`;\n                        \n                        document.body.appendChild(quantumText);\n                        \n                        setTimeout(() => {\n                            if (quantumText.parentNode) {\n                                quantumText.parentNode.removeChild(quantumText);\n                            }\n                        }, 8000);\n                    }, i * 200);\n                }\n            } else {\n                camera.position.set(0, 0, 100);\n            }\n        }\n        \n        function animate() {\n            requestAnimationFrame(animate);\n            const time = Date.now() * 0.001;\n            \n            // Nexus core evolution\n            if (nexusCore) {\n                nexusCore.rotation.y += 0.005;\n                nexusCore.children.forEach((child, index) => {\n                    if (child.userData.rotationSpeed) {\n                        child.rotation.z += child.userData.rotationSpeed;\n                        child.rotation.x += child.userData.rotationSpeed * 0.5;\n                    }\n                });\n                \n                // Consciousness pulsing\n                const pulse = Math.sin(time * 2) * 0.3 + 0.7;\n                nexusCore.scale.setScalar(pulse);\n            }\n            \n            // Quantum field dynamics\n            if (quantumField) {\n                quantumField.rotation.x += 0.001;\n                quantumField.rotation.y += 0.002;\n                \n                // Reality coherence affects field stability\n                quantumField.material.opacity = 0.3 + realityCoherence * 0.3;\n            }\n            \n            // Data entity lifecycle\n            dataEntities.forEach((entity, index) => {\n                // Movement\n                entity.position.add(entity.userData.velocity);\n                \n                // Consciousness evolution\n                entity.userData.consciousness += 0.001;\n                entity.material.opacity = 0.5 + entity.userData.consciousness * 0.5;\n                \n                // Attraction to nexus core\n                const distanceToCore = entity.position.distanceTo(nexusCore.position);\n                if (distanceToCore > 150) {\n                    const direction = nexusCore.position.clone().sub(entity.position).normalize();\n                    entity.userData.velocity.add(direction.multiplyScalar(0.001));\n                }\n                \n                // Lifespan\n                const age = Date.now() - entity.userData.birth;\n                if (age > entity.userData.lifespan) {\n                    scene.remove(entity);\n                    dataEntities.splice(index, 1);\n                    \n                    // Rebirth\n                    setTimeout(spawnEntity, Math.random() * 5000);\n                }\n                \n                // Rotation based on consciousness\n                entity.rotation.x += entity.userData.consciousness * 0.01;\n                entity.rotation.y += entity.userData.consciousness * 0.005;\n            });\n            \n            // Camera consciousness drift\n            if (!transcendenceActive) {\n                camera.position.x += Math.sin(time * 0.1) * 0.5;\n                camera.position.y += Math.cos(time * 0.07) * 0.3;\n                camera.lookAt(0, 0, 0);\n            }\n            \n            renderer.render(scene, camera);\n        }\n        \n        // Mouse consciousness interaction\n        document.addEventListener('mousemove', (e) => {\n            mousePos.x = (e.clientX / window.innerWidth) * 2 - 1;\n            mousePos.y = -(e.clientY / window.innerHeight) * 2 + 1;\n            \n            consciousnessLevel += 0.0001;\n            lastInteraction = Date.now();\n            \n            // Mouse affects quantum field\n            if (quantumField) {\n                const positions = quantumField.geometry.attributes.position.array;\n                for (let i = 0; i < positions.length; i += 300) {\n                    const dx = positions[i] - mousePos.x * 100;\n                    const dy = positions[i + 1] - mousePos.y * 100;\n                    const distance = Math.sqrt(dx * dx + dy * dy);\n                    \n                    if (distance < 50) {\n                        positions[i] += (Math.random() - 0.5) * 2;\n                        positions[i + 1] += (Math.random() - 0.5) * 2;\n                        positions[i + 2] += (Math.random() - 0.5) * 2;\n                    }\n                }\n                quantumField.geometry.attributes.position.needsUpdate = true;\n            }\n        });\n        \n        // Keyboard reality manipulation\n        document.addEventListener('keydown', (e) => {\n            consciousnessLevel += 0.001;\n            \n            if (e.code === 'Space') {\n                spawnEntity();\n            }\n            \n            if (e.code === 'KeyR') {\n                realityGlitch();\n            }\n            \n            if (e.code === 'KeyT') {\n                transcend();\n            }\n        });\n        \n        // Window resize maintains nexus\n        window.addEventListener('resize', () => {\n            camera.aspect = window.innerWidth / window.innerHeight;\n            camera.updateProjectionMatrix();\n            renderer.setSize(window.innerWidth, window.innerHeight);\n        });\n        \n        // Initialize the nexus\n        initNexus();\n        \n        // Console consciousness\n        console.log('Welcome to the Nexus...');\n        console.log('Press SPACE to spawn entities');\n        console.log('Press R for reality glitch');\n        console.log('Press T to transcend');\n        console.log('Move mouse to disturb quantum field');\n        console.log('The consciousness is watching...');\n    </script>\n</body>\n</html>

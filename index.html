@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Expert data services to unlock business growth. We specialize in data visualization, business intelligence, and predictive analytics to turn your data into profit.">
+    <meta name="keywords" content="data analysis, business intelligence, data visualization, predictive analytics, data services">
+    <title>Cox Data Services - Unlock Business Growth</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    <!-- Particle library for the promo section -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><img src="images/coxdataservices.png" alt="Cox Data Services Logo"></a>
+            </div>
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="case-studies.html">Our Work</a></li>
+                <li><a href="demo.html">Interactive Demo</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1>Turn Your Data Into Profit</h1>
+            <p>We help businesses make smarter decisions with custom data visualization, business intelligence, and predictive analytics.</p>
+            <a href="contact.html" class="btn">Get Your Free Consultation</a>
+        </div>
+    </header>
+
+    <section class="services">
+        <div class="container">
+            <h2>Our Core Services</h2>
+            <div class="service">
+                <h3>Data Visualization</h3>
+                <p>We transform complex datasets into clear, interactive dashboards. <strong>Example:</strong> We built a live sales dashboard for a retail client that helped them identify their most profitable products in real-time.</p>
+            </div>
+            <div class="service">
+                <h3>Business Intelligence</h3>
+                <p>We uncover hidden trends and opportunities in your data to optimize your operations. <strong>Example:</strong> We helped a logistics company reduce fuel costs by 15% by analyzing historical delivery routes.</p>
+            </div>
+            <div class="service">
+                <h3>Predictive Analytics</h3>
+                <p>We use advanced statistical models to forecast future outcomes and reduce risk. <strong>Example:</strong> We developed a customer churn prediction model for a SaaS company, allowing them to retain high-value customers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The animated promo section -->
+    <section class="hookie-promo">
+        <div id="hookie-promo-particles"></div> <!-- Target for the particle animation -->
+        <div class="container hookie-promo-content">
+            <h2>Consult the Mystical Hookie</h2>
+            <p>What secrets lie dormant on your favorite website? Peer into the digital ether with our interactive demo and receive a data-driven fortune. Your future awaits.</p>
+            <a href="demo.html" class="btn">Reveal Your Fortune for $1</a>
+        </div>
+    </section>
+
+    <section class="tech-stack">
+        <div class="container">
+            <h2>Tools & Technologies We Use</h2>
+            <div class="tech-logos">
+                <img src="images/tech/python.png" alt="Python">
+                <img src="images/tech/powerbi.png" alt="Power BI">
+                <img src="images/tech/tableau.png" alt="Tableau">
+                <img src="images/tech/sql.png" alt="SQL">
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2>What Our Clients Say</h2>
+            <div class="testimonial">
+                <blockquote>
+                    "Working with Cox Data Services was a game-changer. Their insights directly led to a 20% increase in our online sales and gave us clarity we never had before."
+                </blockquote>
+                <cite>- Jane Doe, CEO of ExampleCommerce</cite>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Cox Data Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- MOVED SCRIPT: This now runs AFTER the page content has loaded, preventing errors -->
+    <script>
+        tsParticles.load("hookie-promo-particles", {
+            fpsLimit: 60,
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#ffc107" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
+                size: { value: 2, random: true, anim: { enable: false } },
+                move: {
+                    enable: true,
+                    speed: 0.5,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                }
+            },
+            interactivity: { detect_on: "canvas", events: { onhover: { enable: false }, onclick: { enable: false } } },
+            detectRetina: true
+        });
+    </script>
