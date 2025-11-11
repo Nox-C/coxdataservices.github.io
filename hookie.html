@@ -49,7 +49,7 @@
             <p>Peer into the digital ether. For just $1, we'll run a live data scrape and reveal a data-driven fortune just for you.</p>
             <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
                 <img src="images/fortune.jpg" alt="Fortune" style="width: 150px; border-radius: 10px;">
-                <div id="paypal-button-container"></div>
+                <div id="paypal-container-RDRYJMMRXM3L8"></div>
             </div>
         </div>
     </header>
@@ -78,7 +78,7 @@
         </div>
     </footer>
 
-    <script src="https://www.paypal.com/sdk/js?client-id=BAAWOSw7zBqVhRIOMXk08-_oOgRATehGfGpl5X5tn1f7KZ_8xEB01hWf-pnOCOO9upCwd4q5phIpeuOBTU&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=BAAWOSw7zBqVhRIOMXk08-_oOgRATehGfGpl5X5tn1f7KZ_8xEB01hWf-pnOCOO9upCwd4q5phIpeuOBTU&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
     <script>
         const consoleElement = document.getElementById('console');
         const resultElement = document.getElementById('result');
@@ -121,8 +121,7 @@
 
             const interval = setInterval(() => {
                 if (lineIndex < consoleLines.length) {
-                    consoleElement.innerHTML += `> ${consoleLines[lineIndex]}
-`;
+                    consoleElement.innerHTML += `> ${consoleLines[lineIndex]}\n`;
                     consoleElement.scrollTop = consoleElement.scrollHeight;
                     lineIndex++;
                 } else {
@@ -134,23 +133,12 @@
             }, 500);
         }
 
-        paypal.Buttons({
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '1.00'
-                        }
-                    }]
-                });
-            },
+        paypal.HostedButtons({
+            hostedButtonId: "RDRYJMMRXM3L8",
             onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    alert('Transaction completed by ' + details.payer.name.given_name);
-                    startScraper();
-                });
+                startScraper();
             }
-        }).render('#paypal-button-container');
+        }).render("#paypal-container-RDRYJMMRXM3L8");
     </script>
 </body>
 </html>
