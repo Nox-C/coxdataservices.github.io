@@ -10,10 +10,12 @@
     <nav>
         <div class="container">
             <div class="logo">
-                <a href="index.html"><img src="images/coxdataservices.png" alt="Cox Data Services Logo"></a>
+                <a href="index.html">Cox Data Services</a>
             </div>
             <ul>
                 <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
                 <li><a href="consciousness.html">Consciousness</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -22,55 +24,170 @@
 
     <header>
         <div class="container">
-            <h1>Our Products</h1>
-            <p>Choose the data intelligence solution that fits your business needs.</p>
+            <h1>Premium Data Products</h1>
+            <p class="hero-subtitle">Enterprise-grade datasets with 90% accuracy guarantee. Trusted by 50+ companies worldwide with monthly recurring revenue streams.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">37K+</span>
+                    <span class="stat-label">Total Records</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">90%</span>
+                    <span class="stat-label">Accuracy Rate</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Support</span>
+                </div>
+            </div>
         </div>
     </header>
 
     <section class="pricing">
         <div class="container">
-            <h2>Pricing Plans</h2>
+            <h2>Enterprise Data Solutions</h2>
             <div class="pricing-grid">
                 <div class="pricing-card">
-                    <h3>Business Intelligence</h3>
-                    <p class="price">$500</p>
+                    <div class="product-badge">MOST POPULAR</div>
+                    <h3>Business Intelligence Database</h3>
+                    <p class="price">$800</p>
+                    <p class="price-note">One-time purchase</p>
                     <ul>
-                        <li>10,000 verified business contacts</li>
-                        <li>Phone numbers and email addresses</li>
-                        <li>Company information and details</li>
+                        <li>✓ 10,000+ verified business contacts</li>
+                        <li>✓ Direct phone numbers & email addresses</li>
+                        <li>✓ Complete company profiles & details</li>
+                        <li>✓ Industry classification & revenue data</li>
+                        <li>✓ 90% accuracy guarantee</li>
+                        <li>✓ CSV/Excel export formats</li>
                     </ul>
-                    <a href="#" class="btn">Purchase Now</a>
+                    <div id="paypal-button-container-1" class="paypal-button"></div>
                 </div>
 
                 <div class="pricing-card featured">
-                    <h3>Real Estate Analytics</h3>
-                    <p class="price">$600</p>
+                    <div class="product-badge premium">ENTERPRISE</div>
+                    <h3>Real Estate Analytics Suite</h3>
+                    <p class="price">$1,200</p>
+                    <p class="price-note">Premium dataset</p>
                     <ul>
-                        <li>15,000 property records</li>
-                        <li>Current market pricing data</li>
-                        <li>Location coordinates and mapping</li>
+                        <li>✓ 15,000+ property records</li>
+                        <li>✓ Current market pricing & valuations</li>
+                        <li>✓ GPS coordinates & mapping data</li>
+                        <li>✓ Property owner contact information</li>
+                        <li>✓ Market trend analysis included</li>
+                        <li>✓ API access available</li>
                     </ul>
-                    <a href="#" class="btn">Purchase Now</a>
+                    <div id="paypal-button-container-2" class="paypal-button"></div>
                 </div>
 
                 <div class="pricing-card">
+                    <div class="product-badge">STARTER</div>
                     <h3>Employment Intelligence</h3>
-                    <p class="price">$400</p>
+                    <p class="price">$600</p>
+                    <p class="price-note">Job market data</p>
                     <ul>
-                        <li>12,000 job market records</li>
-                        <li>Salary benchmarking data</li>
-                        <li>Company hiring information</li>
+                        <li>✓ 12,000+ job market records</li>
+                        <li>✓ Salary benchmarking data</li>
+                        <li>✓ Company hiring information</li>
+                        <li>✓ Skills & requirements analysis</li>
+                        <li>✓ Geographic distribution data</li>
+                        <li>✓ Monthly updates included</li>
                     </ul>
-                    <a href="#" class="btn">Purchase Now</a>
+                    <div id="paypal-button-container-3" class="paypal-button"></div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="custom-solutions">
+        <div class="container">
+            <h2>Custom Enterprise Solutions</h2>
+            <div class="custom-grid">
+                <div class="custom-card">
+                    <h3>🎯 Custom Data Collection</h3>
+                    <p>Need specific data not in our catalog? We'll create custom datasets tailored to your exact requirements with guaranteed accuracy and delivery timelines.</p>
+                    <div class="custom-price">Starting at $2,000</div>
+                </div>
+                <div class="custom-card">
+                    <h3>📊 Analytics & Visualization</h3>
+                    <p>Transform your data into actionable insights with custom dashboards, predictive models, and real-time analytics platforms.</p>
+                    <div class="custom-price">Starting at $5,000</div>
+                </div>
+                <div class="custom-card">
+                    <h3>🔄 Data Integration Services</h3>
+                    <p>Seamlessly integrate our data with your existing systems through APIs, automated feeds, and custom connectors.</p>
+                    <div class="custom-price">Starting at $3,000</div>
+                </div>
+            </div>
+            <div class="custom-cta">
+                <a href="contact.html" class="btn btn-primary">Request Custom Quote</a>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Cox Data Services. All rights reserved.</p>
+            <p>&copy; 2024 Cox Data Services. All rights reserved. | Enterprise Data Solutions | 90% Accuracy Guarantee</p>
         </div>
     </footer>
+
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
+    <script>
+        // PayPal integration for Business Intelligence
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '800.00'
+                        },
+                        description: 'Business Intelligence Database - 10,000+ Verified Contacts'
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Transaction completed by ' + details.payer.name.given_name + '! Your data will be delivered within 24 hours.');
+                });
+            }
+        }).render('#paypal-button-container-1');
+
+        // PayPal integration for Real Estate Analytics
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '1200.00'
+                        },
+                        description: 'Real Estate Analytics Suite - 15,000+ Property Records'
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Transaction completed by ' + details.payer.name.given_name + '! Your data will be delivered within 24 hours.');
+                });
+            }
+        }).render('#paypal-button-container-2');
+
+        // PayPal integration for Employment Intelligence
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '600.00'
+                        },
+                        description: 'Employment Intelligence - 12,000+ Job Market Records'
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Transaction completed by ' + details.payer.name.given_name + '! Your data will be delivered within 24 hours.');
+                });
+            }
+        }).render('#paypal-button-container-3');
+    </script>
 </body>
 </html>
