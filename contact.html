@@ -4,62 +4,231 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Cox Data Services</title>
+    <meta name="description" content="Contact Cox Data Services for enterprise data solutions and professional consulting">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <div class="logo">
-                <a href="index.html">Cox Data Services</a>
-            </div>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="consciousness.html">Consciousness</a></li>
+    <!-- Navigation -->
+    <nav class="nav deco-border">
+        <div class="container nav-container">
+            <div class="nav-brand">Cox Data Services</div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="products.html" class="nav-link">Products</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="hookie.html" class="nav-link">Data Fortune</a></li>
+                <li><a href="contact.html" class="nav-link active">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="contact-header">
+    <!-- Page Header -->
+    <section class="page-header">
         <div class="container">
-            <h1>Contact Cox Data Services</h1>
-            <p class="hero-subtitle">Ready to transform your business with premium data solutions? Let's discuss your enterprise needs.</p>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <span class="contact-icon">📧</span>
-                    <span>contact@coxdataservices.com</span>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-icon">📞</span>
-                    <span>(217) 560-7606</span>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <section class="contact-form">
-        <div class="container">
-            <form action="mailto:contact@coxdataservices.com" method="post" enctype="text/plain">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="5" required></textarea>
-
-                <input type="submit" value="Send Message" class="btn">
-            </form>
+            <h1 class="page-title">Contact Cox Data Services</h1>
+            <p class="page-subtitle">Ready to transform your business with premium data solutions? Let's discuss your enterprise needs.</p>
         </div>
     </section>
 
-    <footer>
+    <!-- Contact Information -->
+    <section class="section">
         <div class="container">
-            <p>&copy; 2024 Cox Data Services. All rights reserved. | Enterprise Data Solutions | 90% Accuracy Guarantee</p>
+            <div class="grid grid-cols-3 gap-8 mb-16">
+                <div class="service-card text-center">
+                    <div class="service-icon">📧</div>
+                    <h3 class="service-title">Email Us</h3>
+                    <p class="service-description">Get in touch for enterprise solutions</p>
+                    <div class="service-pricing">
+                        <div class="service-price-note">contact@coxdataservices.com</div>
+                    </div>
+                </div>
+                
+                <div class="service-card text-center">
+                    <div class="service-icon">📞</div>
+                    <h3 class="service-title">Call Us</h3>
+                    <p class="service-description">Speak directly with our team</p>
+                    <div class="service-pricing">
+                        <div class="service-price-note">(217) 560-7606</div>
+                    </div>
+                </div>
+                
+                <div class="service-card text-center">
+                    <div class="service-icon">⏰</div>
+                    <h3 class="service-title">Business Hours</h3>
+                    <p class="service-description">We're here when you need us</p>
+                    <div class="service-pricing">
+                        <div class="service-price-note">Mon-Fri 9AM-6PM EST</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="section bg-neutral-50">
+        <div class="container">
+            <div class="max-w-2xl mx-auto">
+                <div class="service-card">
+                    <div class="text-center mb-8">
+                        <h2 class="service-title">Send Us a Message</h2>
+                        <p class="service-description">Tell us about your data needs and we'll get back to you within 24 hours</p>
+                    </div>
+                    
+                    <form action="mailto:contact@coxdataservices.com" method="post" enctype="text/plain" class="space-y-6">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name *</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company" class="form-label">Company Name</label>
+                            <input type="text" id="company" name="company" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service" class="form-label">Service Interest</label>
+                            <select id="service" name="service" class="form-input">
+                                <option value="">Select a service</option>
+                                <option value="business-intelligence">Business Intelligence Database ($800)</option>
+                                <option value="real-estate">Real Estate Analytics Suite ($1,200)</option>
+                                <option value="employment">Employment Intelligence ($600)</option>
+                                <option value="custom-data">Custom Data Collection</option>
+                                <option value="analytics">Business Intelligence & Analytics</option>
+                                <option value="integration">Data Integration & APIs</option>
+                                <option value="consulting">Strategic Data Consulting</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="budget" class="form-label">Project Budget Range</label>
+                            <select id="budget" name="budget" class="form-input">
+                                <option value="">Select budget range</option>
+                                <option value="under-1k">Under $1,000</option>
+                                <option value="1k-5k">$1,000 - $5,000</option>
+                                <option value="5k-15k">$5,000 - $15,000</option>
+                                <option value="15k-50k">$15,000 - $50,000</option>
+                                <option value="50k-plus">$50,000+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message *</label>
+                            <textarea id="message" name="message" rows="5" class="form-input" placeholder="Tell us about your data needs, timeline, and any specific requirements..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Contact Us -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center mb-16">
+                <h2 class="deco-corner">Why Contact Us?</h2>
+                <p class="text-lg text-neutral-500">Experience the Cox Data Services difference</p>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="card-title">🚀 Fast Response</h3>
+                    <div class="card-content">
+                        <p>We respond to all inquiries within 24 hours and can often provide initial consultations within 48 hours.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">💡 Expert Consultation</h3>
+                    <div class="card-content">
+                        <p>Get personalized recommendations from our data experts based on your specific business needs and objectives.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">📊 Custom Solutions</h3>
+                    <div class="card-content">
+                        <p>Every business is unique. We create tailored data solutions that fit your requirements and budget.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3 class="card-title">🎯 Proven Results</h3>
+                    <div class="card-content">
+                        <p>Join 50+ enterprise clients who have achieved measurable ROI with our data solutions and services.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section bg-secondary text-white">
+        <div class="container text-center">
+            <h2 class="text-white mb-6">Ready to Get Started?</h2>
+            <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+                Don't let valuable data insights slip away. Contact us today and discover how Cox Data Services can transform your business intelligence.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="mailto:contact@coxdataservices.com" class="btn btn-primary">Email Us Now</a>
+                <a href="tel:+12175607606" class="btn btn-secondary">Call (217) 560-7606</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-white py-16">
+        <div class="container">
+            <div class="grid grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-gold-500 font-decorative text-xl mb-4">Cox Data Services</h3>
+                    <p class="text-neutral-300 mb-4">Professional data solutions for enterprise growth.</p>
+                    <div class="text-sm text-neutral-400">
+                        <p>📧 contact@coxdataservices.com</p>
+                        <p>📞 (217) 560-7606</p>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-gold-500 font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-neutral-300">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="services.html">Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-gold-500 font-semibold mb-4">Popular Products</h4>
+                    <ul class="space-y-2 text-neutral-300">
+                        <li><a href="products.html">Business Intelligence ($800)</a></li>
+                        <li><a href="products.html">Real Estate Suite ($1,200)</a></li>
+                        <li><a href="products.html">Employment Data ($600)</a></li>
+                        <li><a href="hookie.html">Data Fortune ($1)</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-gold-500 font-semibold mb-4">Business Hours</h4>
+                    <div class="text-neutral-300">
+                        <p>Monday - Friday</p>
+                        <p>9:00 AM - 6:00 PM EST</p>
+                        <p class="mt-2 text-gold-500">24-hour email response</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-neutral-700 mt-12 pt-8 text-center text-neutral-400">
+                <p>&copy; 2024 Cox Data Services. All rights reserved.</p>
+            </div>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

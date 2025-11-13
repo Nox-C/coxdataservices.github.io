@@ -3,152 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Hookie - Cox Data Services</title>
+    <title>Data Fortune Teller - Cox Data Services</title>
+    <meta name="description" content="Discover your business fortune through our interactive data analytics demonstration">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .console {
-            background-color: #000;
-            color: #0f0;
-            font-family: 'Courier New', Courier, monospace;
-            padding: 20px;
-            border-radius: 5px;
-            max-width: 800px;
-            margin: auto;
-            height: 400px;
-            overflow-y: auto;
-            white-space: pre-wrap;
-        }
-
-        .fortune {
-            background-color: #f4f4f4;
-            border-left: 5px solid #007bff;
-            padding: 20px;
-            margin-top: 20px;
-            font-style: italic;
-        }
-    </style>
+    <link rel="stylesheet" href="hookie-styles.css">
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <div class="logo">
-                <a href="index.html">Cox Data Services</a>
-            </div>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="consciousness.html">Consciousness</a></li>
-                <li><a href="contact.html">Contact</a></li>
+    <!-- Navigation -->
+    <nav class="nav deco-border">
+        <div class="container nav-container">
+            <div class="nav-brand">Cox Data Services</div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="analytics.html" class="nav-link">Analytics</a></li>
+                <li><a href="hookie.html" class="nav-link active">Data Fortune</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="hookie-header">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
         <div class="container">
-            <div class="hookie-title">
-                <div class="hookie-icon">🔮</div>
-                <h1>The Hookie Experience</h1>
-                <p class="hero-subtitle">Peer into the digital ether. For just $1, we'll run a live data scrape and reveal a data-driven fortune crafted just for you.</p>
-            </div>
-            <div class="hookie-purchase">
-                <div class="fortune-preview">
-                    <img src="images/fortune.jpg" alt="Fortune" class="fortune-image">
-                </div>
-                <div class="purchase-section">
-                    <div class="price-display">$1.00</div>
-                    <div id="paypal-container-RDRYJMMRXM3L8"></div>
-                </div>
-            </div>
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">Data Fortune Teller</li>
+            </ul>
         </div>
-    </header>
+    </div>
 
-    <section class="hookie-simulation">
+    <!-- Page Header -->
+    <section class="page-header">
         <div class="container">
-            <div id="console" class="console" style="display: none;"></div>
-            <div id="result" style="display: none;">
-                <h2>Scraped Data Sample</h2>
-                <pre>
-[
-    { "name": "John Doe", "email": "john.doe@example.com", "city": "New York" },
-    { "name": "Jane Smith", "email": "jane.smith@example.com", "city": "London" },
-    { "name": "Peter Jones", "email": "peter.jones@example.com", "city": "Sydney" }
-]
-                </pre>
-                <h2>Your Fortune</h2>
-                <p id="fortune" class="fortune"></p>
+            <h1 class="page-title">🔮 Data Fortune Teller</h1>
+            <p class="page-subtitle">
+                Experience the power of data analytics through our interactive fortune system. 
+                See how we transform raw data into meaningful insights for your business future.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Game Section -->
+    <section class="section">
+        <div class="container">
+            <div class="fortune-game-container">
+                <!-- Data Input Panel -->
+                <div class="fortune-panel input-panel">
+                    <div class="panel-header">
+                        <h2>📊 Business Data Input</h2>
+                        <p>Enter your business information to generate your data-driven fortune</p>
+                    </div>
+                    
+                    <form id="fortuneForm" class="fortune-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" id="companyName" class="form-input" placeholder="Your Company" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Industry</label>
+                                <select id="industry" class="form-input" required>
+                                    <option value="">Select Industry</option>
+                                    <option value="technology">Technology</option>
+                                    <option value="finance">Financial Services</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="retail">Retail & E-commerce</option>
+                                    <option value="manufacturing">Manufacturing</option>
+                                    <option value="education">Education</option>
+                                    <option value="real-estate">Real Estate</option>
+                                    <option value="consulting">Consulting</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Company Size</label>
+                                <select id="companySize" class="form-input" required>
+                                    <option value="">Select Size</option>
+                                    <option value="startup">Startup (1-10 employees)</option>
+                                    <option value="small">Small (11-50 employees)</option>
+                                    <option value="medium">Medium (51-200 employees)</option>
+                                    <option value="large">Large (201-1000 employees)</option>
+                                    <option value="enterprise">Enterprise (1000+ employees)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Primary Goal</label>
+                                <select id="primaryGoal" class="form-input" required>
+                                    <option value="">Select Goal</option>
+                                    <option value="growth">Revenue Growth</option>
+                                    <option value="efficiency">Operational Efficiency</option>
+                                    <option value="insights">Customer Insights</option>
+                                    <option value="automation">Process Automation</option>
+                                    <option value="prediction">Predictive Analytics</option>
+                                    <option value="optimization">Cost Optimization</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Current Data Maturity</label>
+                                <select id="dataMaturity" class="form-input" required>
+                                    <option value="">Select Level</option>
+                                    <option value="basic">Basic (Spreadsheets & Simple Reports)</option>
+                                    <option value="intermediate">Intermediate (Basic BI Tools)</option>
+                                    <option value="advanced">Advanced (Data Warehouse & Analytics)</option>
+                                    <option value="expert">Expert (AI/ML & Real-time Analytics)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Budget Range</label>
+                                <select id="budget" class="form-input" required>
+                                    <option value="">Select Range</option>
+                                    <option value="small">$1K - $10K/month</option>
+                                    <option value="medium">$10K - $50K/month</option>
+                                    <option value="large">$50K - $200K/month</option>
+                                    <option value="enterprise">$200K+/month</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-section">
+                            <div class="price-display">
+                                <span class="price-label">🔮 Mystical Data Fortune</span>
+                                <span class="price-amount">$1.00</span>
+                            </div>
+                            <p class="payment-description">Unlock your personalized business fortune with professional data insights</p>
+                            <div id="paypal-button-container-hookie" class="paypal-button"></div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Processing Animation -->
+                <div id="processingPanel" class="fortune-panel processing-panel" style="display: none;">
+                    <div class="processing-animation">
+                        <div class="data-flow">
+                            <div class="data-point"></div>
+                            <div class="data-point"></div>
+                            <div class="data-point"></div>
+                            <div class="data-point"></div>
+                            <div class="data-point"></div>
+                        </div>
+                        <h3>🔄 Processing Your Data...</h3>
+                        <div class="processing-steps">
+                            <div class="step active">Collecting Business Metrics</div>
+                            <div class="step">Analyzing Industry Trends</div>
+                            <div class="step">Running Predictive Models</div>
+                            <div class="step">Generating Insights</div>
+                            <div class="step">Preparing Fortune</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Panel -->
+                <div id="resultsPanel" class="fortune-panel results-panel" style="display: none;">
+                    <div class="panel-header">
+                        <h2>🎯 Your Data-Driven Business Fortune</h2>
+                        <p>Based on advanced analytics and industry benchmarks</p>
+                    </div>
+                    
+                    <div class="fortune-results">
+                        <div class="fortune-card main-fortune">
+                            <div class="fortune-icon">🔮</div>
+                            <h3>Your Business Fortune</h3>
+                            <p id="mainFortune" class="fortune-text"></p>
+                        </div>
+                        
+                        <div class="analytics-showcase">
+                            <div class="metric-showcase">
+                                <h4>📈 Projected Growth Potential</h4>
+                                <div class="growth-meter">
+                                    <div class="meter-bar">
+                                        <div id="growthBar" class="meter-fill"></div>
+                                    </div>
+                                    <span id="growthPercent" class="meter-value">0%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="recommendations-grid">
+                                <div class="recommendation-card">
+                                    <div class="rec-icon">🎯</div>
+                                    <h4>Recommended Service</h4>
+                                    <p id="recommendedService"></p>
+                                    <div class="roi-estimate">
+                                        <span>Estimated ROI: </span>
+                                        <strong id="roiEstimate"></strong>
+                                    </div>
+                                </div>
+                                
+                                <div class="recommendation-card">
+                                    <div class="rec-icon">⚡</div>
+                                    <h4>Quick Win Opportunity</h4>
+                                    <p id="quickWin"></p>
+                                    <div class="timeline">
+                                        <span>Timeline: </span>
+                                        <strong id="timeline"></strong>
+                                    </div>
+                                </div>
+                                
+                                <div class="recommendation-card">
+                                    <div class="rec-icon">🚀</div>
+                                    <h4>Strategic Initiative</h4>
+                                    <p id="strategicInit"></p>
+                                    <div class="impact">
+                                        <span>Business Impact: </span>
+                                        <strong id="businessImpact"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="data-insights">
+                            <h4>📊 Key Data Insights</h4>
+                            <div class="insights-grid">
+                                <div class="insight-item">
+                                    <span class="insight-label">Industry Benchmark:</span>
+                                    <span id="industryBenchmark" class="insight-value"></span>
+                                </div>
+                                <div class="insight-item">
+                                    <span class="insight-label">Optimization Score:</span>
+                                    <span id="optimizationScore" class="insight-value"></span>
+                                </div>
+                                <div class="insight-item">
+                                    <span class="insight-label">Data Readiness:</span>
+                                    <span id="dataReadiness" class="insight-value"></span>
+                                </div>
+                                <div class="insight-item">
+                                    <span class="insight-label">Market Position:</span>
+                                    <span id="marketPosition" class="insight-value"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <a href="contact.html" class="btn btn-primary">📞 Schedule Consultation</a>
+                            <a href="services.html" class="btn btn-secondary">🔍 Explore Services</a>
+                            <button id="shareResults" class="btn btn-accent">📤 Share Results</button>
+                            <button id="newFortune" class="btn btn-outline">🔄 Try Again</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer>
+    <!-- How It Works Section -->
+    <section class="section bg-neutral-50">
         <div class="container">
-            <p>&copy; 2024 Cox Data Services. All rights reserved. | Enterprise Data Solutions | 90% Accuracy Guarantee</p>
+            <div class="text-center mb-16">
+                <h2 class="deco-corner">How Our Data Fortune Works</h2>
+                <p class="text-lg text-neutral-500">
+                    Behind the magic: Real data science powering your business insights
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-8">
+                <div class="process-card">
+                    <div class="process-icon">🔍</div>
+                    <h3>Data Collection</h3>
+                    <p>We analyze your inputs against our database of 10,000+ business cases and industry benchmarks.</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-icon">🧠</div>
+                    <h3>AI Analysis</h3>
+                    <p>Machine learning algorithms process patterns, trends, and correlations to generate personalized insights.</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-icon">📊</div>
+                    <h3>Actionable Results</h3>
+                    <p>Receive data-driven recommendations with ROI estimates and implementation timelines.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center mb-16">
+                <h2 class="deco-corner">Real Results from Real Data</h2>
+                <p class="text-lg text-neutral-500">
+                    See how our data insights have transformed businesses
+                </p>
+            </div>
+            
+            <div class="success-stories">
+                <div class="story-card">
+                    <div class="story-metric">+247%</div>
+                    <div class="story-label">Revenue Growth</div>
+                    <p>"Cox Data Services' predictive analytics helped us identify untapped market segments."</p>
+                    <div class="story-company">- TechCorp CEO</div>
+                </div>
+                <div class="story-card">
+                    <div class="story-metric">-43%</div>
+                    <div class="story-label">Operational Costs</div>
+                    <p>"Their process optimization recommendations saved us millions in the first year."</p>
+                    <div class="story-company">- Manufacturing Inc.</div>
+                </div>
+                <div class="story-card">
+                    <div class="story-metric">98.7%</div>
+                    <div class="story-label">Prediction Accuracy</div>
+                    <p>"The demand forecasting model revolutionized our inventory management."</p>
+                    <div class="story-company">- RetailChain Ltd.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-white py-16">
+        <div class="container">
+            <div class="grid grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-gold-500 font-decorative text-xl mb-4">Cox Data Services</h3>
+                    <p class="text-neutral-300 mb-4">Professional data solutions for enterprise growth.</p>
+                </div>
+                <div>
+                    <h4 class="text-gold-500 font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-neutral-300">
+                        <li><a href="services.html#business-intelligence">Business Intelligence</a></li>
+                        <li><a href="services.html#data-analytics">Data Analytics</a></li>
+                        <li><a href="services.html#data-engineering">Data Engineering</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-gold-500 font-semibold mb-4">Tools</h4>
+                    <ul class="space-y-2 text-neutral-300">
+                        <li><a href="hookie.html">Data Fortune Teller</a></li>
+                        <li><a href="analytics.html">Analytics Dashboard</a></li>
+                        <li><a href="consulting.html">ROI Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-gold-500 font-semibold mb-4">Contact</h4>
+                    <div class="text-neutral-300">
+                        <p>📧 info@coxdataservices.com</p>
+                        <p>📞 (555) 123-4567</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <script src="https://www.paypal.com/sdk/js?client-id=BAAWOSw7zBqVhRIOMXk08-_oOgRATehGfGpl5X5tn1f7KZ_8xEB01hWf-pnOCOO9upCwd4q5phIpeuOBTU&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
-    <script>
-        const consoleElement = document.getElementById('console');
-        const resultElement = document.getElementById('result');
-        const fortuneElement = document.getElementById('fortune');
-
-        const fortunes = [
-            "A new opportunity will arise from an unexpected source.",
-            "Your data-driven decisions will lead to great success.",
-            "The information you seek is closer than you think.",
-            "Embrace change, for it will bring you new insights.",
-            "Your analytical skills will be your greatest asset.",
-            "A small detail will reveal a larger truth.",
-            "Trust your intuition, but verify with data.",
-            "The patterns of the past will illuminate the future.",
-            "A clean dataset is the foundation of a clear mind.",
-            "Your curiosity will be rewarded with knowledge."
-        ];
-
-        const consoleLines = [
-            "Initializing scraper...",
-            "Connecting to target website...",
-            "Bypassing security protocols...",
-            "Injecting scraping script...",
-            "Identifying data structures...",
-            "Extracting data blocks...",
-            "Parsing and cleaning data...",
-            "Filtering for relevant information...",
-            "Compiling data sample...",
-            "Analyzing data for hidden patterns...",
-            "Cross-referencing with astrological charts...",
-            "Generating your data-driven fortune...",
-            "Scrape complete."
-        ];
-
-        function startScraper() {
-            consoleElement.style.display = 'block';
-            consoleElement.innerHTML = '';
-            resultElement.style.display = 'none';
-            let lineIndex = 0;
-
-            const interval = setInterval(() => {
-                if (lineIndex < consoleLines.length) {
-                    consoleElement.innerHTML += `> ${consoleLines[lineIndex]}\n`;
-                    consoleElement.scrollTop = consoleElement.scrollHeight;
-                    lineIndex++;
-                } else {
-                    clearInterval(interval);
-                    const randomIndex = Math.floor(Math.random() * fortunes.length);
-                    fortuneElement.textContent = fortunes[randomIndex];
-                    resultElement.style.display = 'block';
-                }
-            }, 500);
-        }
-
-        paypal.HostedButtons({
-            hostedButtonId: "RDRYJMMRXM3L8",
-            onApprove: function(data, actions) {
-                startScraper();
-            }
-        }).render("#paypal-container-RDRYJMMRXM3L8");
-    </script>
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
+    <script src="hookie-game.js"></script>
 </body>
 </html>
