@@ -21,6 +21,7 @@
         scroll-behavior: smooth;
         font-size: 16px;
         -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
     }
     
     body {
@@ -687,7 +688,7 @@
     .hero {
         background: white !important;
         color: black !important;
-        min-height: auto !important;
+        min-height: 0 !important;
     }
 }
 
@@ -1099,4 +1100,5 @@
     .justify-center { justify-content: center; }
     .flex { display: flex; }
     .text-center { text-align: center; }
+}
 }
