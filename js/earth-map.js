@@ -265,42 +265,39 @@ function initGoogleEarth() {
     }
 }
 
-// Load Google Maps API with Earth Engine support
+// Initialize Google Maps API with async loading
 function loadGoogleMaps() {
     const apiKey = 'AIzaSyAC4S7RIzF1AKZqSqQdi4UKOYyZNSHjN_k';
     
     if (!apiKey) {
-        console.error('Google Maps API key is missing');
-        const container = document.getElementById('earth-map');
-        if (container) {
-            container.innerHTML = `
-                <div style="padding: 20px; background: #ffebee; border: 1px solid #ef9a9a; border-radius: 4px; color: #b71c1c;">
-                    <h3>Error: Missing API Key</h3>
-                    <p>Google Maps API key is required to load the map.</p>
-                </div>
-            `;
-        }
+        showMapError('Google Maps API key is missing');
         return;
     }
     
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=visualization,earth&callback=initGoogleEarth`;
-    script.async = true;
-    script.defer = true;
-    script.onerror = function() {
-        console.error('Failed to load Google Maps API');
-        const container = document.getElementById('earth-map');
-        if (container) {
-            container.innerHTML = `
-                <div style="padding: 20px; background: #ffebee; border: 1px solid #ef9a9a; border-radius: 4px; color: #b71c1c;">
-                    <h3>Error Loading Google Maps</h3>
-                    <p>There was an error loading the Google Maps API. Please check your internet connection and API key.</p>
-                    <p>Required APIs: Maps JavaScript API, Earth Engine API</p>
-                </div>
-            `;
-        }
-    };
-    document.head.appendChild(script);
+    // Use the new async loading pattern
+    (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+        key: apiKey,
+        v: "weekly",
+        libraries: ["visualization", "earth"]
+    });
+    
+    // Set up the callback when the API is loaded
+    window.initGoogleEarth = initGoogleEarth;
+}
+
+// Helper function to show map errors
+function showMapError(message) {
+    console.error(message);
+    const container = document.getElementById('earth-map');
+    if (container) {
+        container.innerHTML = `
+            <div style="padding: 20px; background: #ffebee; border: 1px solid #ef9a9a; border-radius: 4px; color: #b71c1c;">
+                <h3>Error Loading Map</h3>
+                <p>${message}</p>
+                <p>Please check the console for more details.</p>
+            </div>
+        `;
+    }
 }
 
 // Start loading Google Maps when the page loads
