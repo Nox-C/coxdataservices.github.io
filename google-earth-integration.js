@@ -1,23 +1,66 @@
-// Google Earth Integration with Proper Attribution
+// Google Earth Integration with Google Maps JavaScript API
 class GoogleEarthChart {
     constructor(containerId) {
         this.container = document.getElementById(containerId);
-        this.createGoogleEarthView();
-        this.dataPoints = this.generateGeospatialData();
-        this.setupControls();
+        this.map = null;
+        this.earth = null;
+        this.markers = [];
+        this.initMap();
     }
     
-    createGoogleEarthView() {
-        // Create Google Earth container
-        const earthContainer = document.createElement('div');
-        earthContainer.id = 'google-earth-view';
-        earthContainer.style.cssText = `
-            width: 1200px;
-            height: 800px;
-            border: 4px solid #E5B80B;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(229, 184, 11, 0.3);
-            position: relative;
+    initMap() {
+        try {
+            // Initialize the map with the provided API key
+            this.map = new google.maps.Map(this.container, {
+                center: { lat: 20, lng: 0 },
+                zoom: 2,
+                mapTypeId: 'satellite',
+                tilt: 45,
+                heading: 0,
+                mapTypeControl: true,
+                streetViewControl: false,
+                fullscreenControl: true,
+                zoomControl: true,
+                scaleControl: true
+            });
+        });
+
+        // Add Earth Engine overlay when the map is ready
+        google.maps.event.addListenerOnce(this.map, 'tilesloaded', () => {
+            this.initEarthEngine();
+        });
+    }
+    
+    initEarthEngine() {
+        // Get the map's div
+        const mapDiv = this.map.getDiv();
+        
+        // Create Earth instance (this requires the Google Earth API to be loaded)
+        google.earth.createInstance(mapDiv, (earthInstance) => {
+            this.earth = earthInstance;
+            
+            // Set initial view
+            const lookAt = this.earth.createLookAt('');
+            lookAt.setLatitude(20);
+            lookAt.setLongitude(0);
+            lookAt.setRange(15000000); // Distance in meters
+            lookAt.setTilt(60);
+            
+            this.earth.getView().setAbstractView(lookAt);
+            
+            // Add some sample data points
+            this.addSampleDataPoints();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                google.earth.trigger(earthInstance, 'resize');
+            });
+        }, (error) => {
+            console.error('Error loading Google Earth:', error);
+            // Fallback to regular map view if Earth fails
+            this.addFallbackMarkers();
+        });
+    }
             background: #000;
         `;
         
@@ -169,9 +212,25 @@ class GoogleEarthChart {
 }
 
 // Initialize Google Earth integration
-document.addEventListener('DOMContentLoaded', function() {
-    // Replace the 4D chart with Google Earth integration
-    const chartContainer = document.createElement('div');
+function initGoogleEarth() {
+    const container = document.getElementById('earth-map');
+    if (container) {
+        // Only initialize if we have the container
+        window.earthChart = new GoogleEarthChart('earth-map');
+    }
+}
+
+// Load Google Maps API with Earth Engine support
+function loadGoogleMaps() {
+    const script = document.createElement('script');
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=833906364040-ahs59k8tkpul7hb4sno2ebidog2ifgcj.apps.googleusercontent.com&libraries=visualization,earth&callback=initGoogleEarth';
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+}
+
+// Start loading Google Maps when the page loads
+document.addEventListener('DOMContentLoaded', loadGoogleMaps);
     chartContainer.id = 'google-earth-chart';
     chartContainer.style.textAlign = 'center';
     chartContainer.style.margin = '2rem 0';
