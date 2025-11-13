@@ -1,0 +1,342 @@
+/* Art Deco Micro-Details & Innovations */
+
+/* Custom Art Deco Bullet Points */
+.service-features li::before {
+    content: '◆';
+    color: var(--primary);
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    animation: sparkle 2s infinite alternate;
+}
+
+@keyframes sparkle {
+    0% { opacity: 0.8; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.1); }
+}
+
+/* Enhanced Headers with Art Deco Flourishes */
+h1, h2, h3 {
+    position: relative;
+    overflow: visible;
+}
+
+h1::before, h2::before {
+    content: '◊';
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary);
+    font-size: 1.5em;
+    opacity: 0.7;
+    animation: pulse 3s infinite;
+}
+
+h1::after, h2::after {
+    content: '◊';
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary);
+    font-size: 1.5em;
+    opacity: 0.7;
+    animation: pulse 3s infinite 1.5s;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; transform: translateY(-50%) scale(1); }
+    50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+}
+
+/* Art Deco Dividers */
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--primary) 20%, 
+        var(--light-gold) 50%, 
+        var(--primary) 80%, 
+        transparent 100%);
+}
+
+/* Enhanced Footer with Art Deco Pattern */
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: 
+        repeating-linear-gradient(45deg,
+            var(--primary) 0px,
+            var(--primary) 5px,
+            var(--dark-gold) 5px,
+            var(--dark-gold) 10px,
+            var(--light-gold) 10px,
+            var(--light-gold) 15px,
+            var(--primary) 15px,
+            var(--primary) 20px
+        );
+    opacity: 0.8;
+}
+
+/* Interactive Navigation Enhancements */
+.nav-link {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(245, 216, 53, 0.3), 
+        transparent);
+    transition: left 0.6s ease;
+}
+
+.nav-link:hover::after {
+    left: 100%;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--deep-navy);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--primary), var(--dark-gold));
+    border-radius: 6px;
+    border: 2px solid var(--deep-navy);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--light-gold), var(--primary));
+}
+
+/* Enhanced Card Corners */
+.card::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    background: 
+        linear-gradient(45deg, transparent 40%, var(--primary) 40%, var(--primary) 60%, transparent 60%),
+        linear-gradient(-45deg, transparent 40%, var(--light-gold) 40%, var(--light-gold) 60%, transparent 60%);
+    opacity: 0.6;
+    animation: rotate 10s linear infinite;
+}
+
+/* Text Selection Styling */
+::selection {
+    background: var(--primary);
+    color: var(--deep-navy);
+    text-shadow: none;
+}
+
+::-moz-selection {
+    background: var(--primary);
+    color: var(--deep-navy);
+    text-shadow: none;
+}
+
+/* Art Deco Buttons */
+.deco-btn {
+    position: relative;
+    background: linear-gradient(135deg, var(--primary), var(--light-gold));
+    border: 2px solid var(--dark-gold);
+    color: var(--deep-navy);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 12px 24px;
+    margin: 0 8px;
+    box-shadow: 0 4px 15px rgba(229, 184, 11, 0.4);
+}
+
+.deco-btn::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background: linear-gradient(45deg, var(--light-gold), var(--primary));
+    z-index: -1;
+    border-radius: 4px;
+}
+
+.deco-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(229, 184, 11, 0.6);
+    background: linear-gradient(135deg, var(--light-gold), var(--primary));
+}
+
+/* Loading Animation for Metrics */
+.metric-value {
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-value::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(245, 216, 53, 0.4), 
+        transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Enhanced Form Inputs */
+.form-input {
+    position: relative;
+    background: linear-gradient(135deg, var(--cream), #ffffff);
+    border: 2px solid var(--primary);
+}
+
+.form-input:focus {
+    box-shadow: 
+        0 0 0 3px rgba(229, 184, 11, 0.2),
+        inset 0 2px 4px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #ffffff, var(--cream));
+}
+
+/* Hover Effects for Links */
+a:not(.btn):not(.nav-link) {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+a:not(.btn):not(.nav-link)::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--light-gold));
+    transition: width 0.3s ease;
+}
+
+a:not(.btn):not(.nav-link):hover::after {
+    width: 100%;
+}
+
+/* Enhanced List Styling */
+ul:not(.nav-menu):not(.service-features) li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 8px;
+}
+
+ul:not(.nav-menu):not(.service-features) li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: bold;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(3px); }
+}
+
+/* Page Load Animation */
+body {
+    animation: pageLoad 1s ease-out;
+}
+
+@keyframes pageLoad {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Art Deco Headers */
+h1, h2, h3 {
+    text-shadow: 3px 3px 0px var(--dark-gold), 6px 6px 0px var(--secondary);
+    background: linear-gradient(135deg, var(--light-gold), var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+}
+
+h1::after, h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--light-gold), var(--primary));
+    animation: underlineGlow 3s infinite alternate;
+}
+
+@keyframes underlineGlow {
+    0% { width: 80px; opacity: 0.7; }
+    100% { width: 120px; opacity: 1; }
+}
+
+/* Interactive Elements Feedback */
+.card, .btn, .nav-link, .metric-card {
+    cursor: pointer;
+    user-select: none;
+}
+
+.card:active, .btn:active {
+    transform: scale(0.98);
+}
+
+/* Status Indicators */
+.live-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #10B981;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
+}
