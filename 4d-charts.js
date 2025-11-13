@@ -264,8 +264,8 @@ class FourDimensionalChart {
             this.timeSlice = this.realTime.getHours() * 10;
         }
         
-        // Draw grid
-        this.drawGrid();
+        // Draw globe
+        this.drawGlobe();
         
         // Draw connections first (behind points)
         this.drawConnections();
@@ -284,40 +284,66 @@ class FourDimensionalChart {
         requestAnimationFrame(() => this.animate());
     }
     
-    drawGrid() {
-        // Draw globe wireframe (latitude/longitude lines)
-        this.ctx.strokeStyle = 'rgba(229, 184, 11, 0.15)';
+    drawGlobe() {
+        const centerX = this.canvas.width / 2;
+        const centerY = this.canvas.height / 2;
+        const radius = 200 * this.zoom;
+        
+        // Draw Earth sphere
+        const gradient = this.ctx.createRadialGradient(
+            centerX - 50, centerY - 50, 0,
+            centerX, centerY, radius
+        );
+        gradient.addColorStop(0, '#4A90E2');
+        gradient.addColorStop(0.7, '#2E5C8A');
+        gradient.addColorStop(1, '#1A3A5C');
+        
+        this.ctx.fillStyle = gradient;
+        this.ctx.beginPath();
+        this.ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        this.ctx.fill();
+        
+        // Draw continents (simplified)
+        this.drawContinents(centerX, centerY, radius);
+        
+        // Draw lat/lng grid
+        this.ctx.strokeStyle = 'rgba(229, 184, 11, 0.3)';
         this.ctx.lineWidth = 1;
         
         // Latitude lines
-        for (let lat = -80; lat <= 80; lat += 20) {
+        for (let lat = -60; lat <= 60; lat += 30) {
             this.ctx.beginPath();
-            for (let lng = -180; lng <= 180; lng += 10) {
-                const pos = this.projectToGlobe(lng, lat);
-                const projected = this.project3D(pos.x, pos.y, pos.z);
-                if (lng === -180) {
-                    this.ctx.moveTo(projected.x, projected.y);
-                } else {
-                    this.ctx.lineTo(projected.x, projected.y);
-                }
-            }
+            const y = centerY + (lat / 90) * radius * 0.8;
+            const width = Math.cos(lat * Math.PI / 180) * radius;
+            this.ctx.ellipse(centerX, y, width, radius * 0.1, 0, 0, Math.PI * 2);
             this.ctx.stroke();
         }
         
         // Longitude lines
-        for (let lng = -180; lng <= 180; lng += 30) {
+        for (let lng = -150; lng <= 150; lng += 30) {
             this.ctx.beginPath();
-            for (let lat = -90; lat <= 90; lat += 5) {
-                const pos = this.projectToGlobe(lng, lat);
-                const projected = this.project3D(pos.x, pos.y, pos.z);
-                if (lat === -90) {
-                    this.ctx.moveTo(projected.x, projected.y);
-                } else {
-                    this.ctx.lineTo(projected.x, projected.y);
-                }
-            }
+            this.ctx.ellipse(centerX, centerY, radius * 0.3, radius, lng * Math.PI / 180, 0, Math.PI * 2);
             this.ctx.stroke();
         }
+    }
+    
+    drawContinents(centerX, centerY, radius) {
+        this.ctx.fillStyle = '#2D5A2D';
+        
+        // North America (simplified)
+        this.ctx.beginPath();
+        this.ctx.ellipse(centerX - radius * 0.3, centerY - radius * 0.2, radius * 0.25, radius * 0.3, 0, 0, Math.PI * 2);
+        this.ctx.fill();
+        
+        // Europe/Africa
+        this.ctx.beginPath();
+        this.ctx.ellipse(centerX + radius * 0.1, centerY, radius * 0.15, radius * 0.4, 0, 0, Math.PI * 2);
+        this.ctx.fill();
+        
+        // Asia
+        this.ctx.beginPath();
+        this.ctx.ellipse(centerX + radius * 0.4, centerY - radius * 0.1, radius * 0.2, radius * 0.25, 0, 0, Math.PI * 2);
+        this.ctx.fill();
     }
     
     setupInteractions() {

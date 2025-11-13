@@ -21,15 +21,16 @@ class GoogleEarthChart {
             background: #000;
         `;
         
-        // Add Google Earth iframe
+        // Add Google Earth iframe with embed parameters
         const iframe = document.createElement('iframe');
-        iframe.src = 'https://earth.google.com/web/';
+        iframe.src = 'https://earth.google.com/web/@40.7128,-74.0060,0a,22251752.77375655d,35y,0h,0t,0r';
         iframe.style.cssText = `
             width: 100%;
             height: 100%;
             border: none;
             border-radius: 8px;
         `;
+        iframe.allow = 'geolocation';
         
         earthContainer.appendChild(iframe);
         
