@@ -657,10 +657,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     chartContainer.appendChild(title);
     
-    // Insert into main section after hero
-    const mainSection = document.querySelector('.section');
-    if (mainSection) {
-        mainSection.insertBefore(chartContainer, mainSection.firstChild);
+    // Insert after hero section
+    const heroSection = document.querySelector('.hero');
+    if (heroSection && heroSection.nextElementSibling) {
+        heroSection.parentNode.insertBefore(chartContainer, heroSection.nextElementSibling);
         new FourDimensionalChart('fourd-chart');
     } else {
         document.body.appendChild(chartContainer);

@@ -183,10 +183,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     chartContainer.appendChild(title);
     
-    // Insert into main section
-    const mainSection = document.querySelector('.section');
-    if (mainSection) {
-        mainSection.insertBefore(chartContainer, mainSection.firstChild);
+    // Insert after hero section
+    const heroSection = document.querySelector('.hero');
+    if (heroSection && heroSection.nextElementSibling) {
+        heroSection.parentNode.insertBefore(chartContainer, heroSection.nextElementSibling);
+        new GoogleEarthChart('google-earth-chart');
+    } else {
+        document.body.appendChild(chartContainer);
         new GoogleEarthChart('google-earth-chart');
     }
 });
