@@ -10,6 +10,8 @@ class FourDimensionalChart {
         this.rotationX = 0;
         this.rotationY = 0;
         this.zoom = 1;
+        this.realTime = new Date();
+        this.timeSpeed = 1;
         this.isDragging = false;
         this.lastMouse = {x: 0, y: 0};
         this.selectedPoint = null;
@@ -63,13 +65,28 @@ class FourDimensionalChart {
         
         return cities.map(city => ({
             ...city,
-            x: (city.lng + 180) * 4,
-            y: (90 - city.lat) * 3,
-            z: city.value / 1000000,
+            // Globe projection (spherical coordinates)
+            x: this.projectToGlobe(city.lng, city.lat).x,
+            y: this.projectToGlobe(city.lng, city.lat).y,
+            z: this.projectToGlobe(city.lng, city.lat).z,
+            value3d: city.value / 1000000,
             timeData: Array.from({length: 24}, (_, i) => 
                 city.value * (0.8 + Math.sin(i * Math.PI / 12) * 0.3)
             )
         }));
+    }
+    
+    projectToGlobe(lng, lat) {
+        // Convert lat/lng to 3D sphere coordinates (like Google Earth)
+        const radius = 200;
+        const phi = (90 - lat) * Math.PI / 180;
+        const theta = (lng + 180) * Math.PI / 180;
+        
+        return {
+            x: radius * Math.sin(phi) * Math.cos(theta),
+            y: radius * Math.cos(phi),
+            z: radius * Math.sin(phi) * Math.sin(theta)
+        };
     }
     
     project3D(x, y, z) {
@@ -102,10 +119,12 @@ class FourDimensionalChart {
         const timeValue = point.timeData[Math.floor(this.timeSlice) % 24];
         const intensity = timeValue / point.value;
         
+        // Use globe projection
+        const globePos = this.projectToGlobe(point.lng, point.lat);
         const projected = this.project3D(
-            point.x - 360, 
-            point.y - 135, 
-            point.z * intensity
+            globePos.x, 
+            globePos.y, 
+            globePos.z + (point.value3d * intensity * 20)
         );
         
         // Multi-dimensional visualization
@@ -235,11 +254,14 @@ class FourDimensionalChart {
     animate() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
-        // Auto-rotate for 4D effect (only if not dragging)
+        // Real-time updates (only if not dragging)
         if (!this.isDragging && this.isPlaying) {
-            this.rotationX += 0.002;
-            this.rotationY += 0.001;
-            this.timeSlice += 0.5 * this.playSpeed;
+            this.rotationX += 0.001;
+            this.rotationY += 0.0005;
+            
+            // Real time progression
+            this.realTime = new Date(this.realTime.getTime() + (60000 * this.playSpeed));
+            this.timeSlice = this.realTime.getHours() * 10;
         }
         
         // Draw grid
@@ -263,25 +285,38 @@ class FourDimensionalChart {
     }
     
     drawGrid() {
-        this.ctx.strokeStyle = 'rgba(229, 184, 11, 0.1)';
+        // Draw globe wireframe (latitude/longitude lines)
+        this.ctx.strokeStyle = 'rgba(229, 184, 11, 0.15)';
         this.ctx.lineWidth = 1;
         
-        for (let i = -200; i <= 200; i += 50) {
-            for (let j = -200; j <= 200; j += 50) {
-                const p1 = this.project3D(i, j, 0);
-                const p2 = this.project3D(i + 50, j, 0);
-                const p3 = this.project3D(i, j + 50, 0);
-                
-                this.ctx.beginPath();
-                this.ctx.moveTo(p1.x, p1.y);
-                this.ctx.lineTo(p2.x, p2.y);
-                this.ctx.stroke();
-                
-                this.ctx.beginPath();
-                this.ctx.moveTo(p1.x, p1.y);
-                this.ctx.lineTo(p3.x, p3.y);
-                this.ctx.stroke();
+        // Latitude lines
+        for (let lat = -80; lat <= 80; lat += 20) {
+            this.ctx.beginPath();
+            for (let lng = -180; lng <= 180; lng += 10) {
+                const pos = this.projectToGlobe(lng, lat);
+                const projected = this.project3D(pos.x, pos.y, pos.z);
+                if (lng === -180) {
+                    this.ctx.moveTo(projected.x, projected.y);
+                } else {
+                    this.ctx.lineTo(projected.x, projected.y);
+                }
             }
+            this.ctx.stroke();
+        }
+        
+        // Longitude lines
+        for (let lng = -180; lng <= 180; lng += 30) {
+            this.ctx.beginPath();
+            for (let lat = -90; lat <= 90; lat += 5) {
+                const pos = this.projectToGlobe(lng, lat);
+                const projected = this.project3D(pos.x, pos.y, pos.z);
+                if (lat === -90) {
+                    this.ctx.moveTo(projected.x, projected.y);
+                } else {
+                    this.ctx.lineTo(projected.x, projected.y);
+                }
+            }
+            this.ctx.stroke();
         }
     }
     
@@ -385,15 +420,17 @@ class FourDimensionalChart {
         // Get accurate location analysis
         const locationAnalysis = this.getLocationAnalysis(constrainedLat, constrainedLng);
         
-        // Add new location to data points with accurate data
+        // Add new location with globe projection
+        const globePos = this.projectToGlobe(constrainedLng, constrainedLat);
         const newPoint = {
             name: locationAnalysis.name,
             lat: constrainedLat,
             lng: constrainedLng,
             value: locationAnalysis.estimatedPopulation,
-            x: (constrainedLng + 180) * 4,
-            y: (90 - constrainedLat) * 3,
-            z: locationAnalysis.estimatedPopulation / 1000000,
+            x: globePos.x,
+            y: globePos.y,
+            z: globePos.z,
+            value3d: locationAnalysis.estimatedPopulation / 1000000,
             timeData: Array.from({length: 24}, (_, i) => 
                 locationAnalysis.estimatedPopulation * (0.8 + Math.sin(i * Math.PI / 12) * 0.3)
             ),
@@ -545,22 +582,25 @@ class FourDimensionalChart {
         this.ctx.lineWidth = 2;
         this.ctx.strokeRect(10, 10, 250, 160);
         
-        // Art Deco title with geometric border
+        // Sharp Art Deco title
         this.ctx.fillStyle = '#E5B80B';
         this.ctx.fillRect(15, 15, 240, 25);
         this.ctx.fillStyle = '#0A2240';
         this.ctx.fillRect(17, 17, 236, 21);
         
         this.ctx.fillStyle = '#F5D835';
-        this.ctx.font = 'bold 14px Arial';
-        this.ctx.fillText('◆ 4D GEOSPATIAL ANALYSIS ◆', 25, 32);
+        this.ctx.font = 'bold 16px monospace';
+        this.ctx.textAlign = 'left';
+        this.ctx.fillText('4D GEOSPATIAL ANALYSIS', 25, 32);
         
         this.ctx.font = '11px Arial';
         this.ctx.fillText('🖱️ Drag: Rotate | 🖱️ Wheel: Zoom', 20, 50);
         this.ctx.fillText('📊 Click points for details', 20, 65);
         this.ctx.fillText(`⏱️ Speed: ${this.playSpeed.toFixed(1)}x`, 20, 80);
         this.ctx.fillText(`🔍 Zoom: ${this.zoom.toFixed(1)}x (Max: 20x)`, 20, 95);
-        this.ctx.fillText(`⏰ Time: ${Math.floor(this.timeSlice/10) % 24}:00`, 20, 110);
+        const currentHour = this.realTime.getHours();
+        const currentMin = this.realTime.getMinutes();
+        this.ctx.fillText(`⏰ Time: ${currentHour.toString().padStart(2,'0')}:${currentMin.toString().padStart(2,'0')}`, 20, 110);
         
         if (this.selectedPoint !== null) {
             const point = this.dataPoints[this.selectedPoint];
